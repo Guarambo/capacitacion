@@ -1,0 +1,211 @@
+Estandar Versionamiento en Pragma
+
+---------------------- REGLAS GENERALES - INICIO ----------------------
+
+-- NUNCA modificar directamente la línea base (tronco o rama master).
+Las modificaciones se deben realizar sobre ramas de desarrollo/release/fix.
+Las únicas modificaciones sobre el tronco deben ser hechas mediante “merge” de ramas.
+
+-- Se debe sincronizar frecuentemente el código en el ambiente local,
+como mínimo, al iniciar labores y antes de hacer cada commit. 
+
+-- Cada desarrollador debe garantizar que el código que se suba al repositorio,
+esté estable (compila correctamente).
+
+-- Deben realizarse commits granulares, es decir,
+no mezclar diferentes issues/temas/historias de usuario dentro de un mismo commit.
+Esto es, con la finalización de una tarea específica,
+una porción de código con una funcionalidad puntual ola creación/modificación de módulos/componentes.
+(esta política aplica fuertemente en versionamiento distribuido).
+
+-- Cada commit debe estar acompañado de un comentario acorde a lo desarrollado.
+Dependiendo de cada proyecto, se debe especificar si hace parte de una Historia de Usuario,
+un caso de uso, un requerimiento o un ticket de soporte.
+
+-- No aplicar formateo automático a artefactos completos, sino a líneas específicas.
+Esto minimiza las necesidades de resolución manual de conflictos en
+versionamiento distribuido y lo hace más simple en versionamiento centralizado.
+
+-- Para la corrección automática de indentación en eclipse,
+usar el comando Ctrl+i  (Source -> Correct Indentation). NO usar Ctrl+f para esto.
+
+-- No hacer modificaciones (commit) sobre TAGs, estos deben ser sólo de lectura.
+
+-- Los nombres de los artefactos deben tener sólo caracteres alphanuméricos [0-9A-Za-z-]
+y no deben contener tildes, espacios ni caracteres especiales diferentes a . - 
+
+
+---------------------- REGLAS GENERALES - FIN ----------------------
+
+
+---------------------- Ramificacion ----------------------
+Imagen de como funciona el flujo en pragma (Pragma-Flow)
+'A continuación se detalla el flujo estándar para los proyectos con versionamiento distribuido en Pragma.'
+https://drive.google.com/open?id=1WcHSaOGfGzpihNauoFQ2Cu3sKGJNzigu
+
+---Tronco (master)
+
+Esta rama debe ser “protegida”, es decir, sólo los roles Master y
+Owner pueden hacer modificaciones sobre ella.
+Se debe mantener código “limpio” y estable en esta rama,
+esto permitirá más adelante hacer integración continua. 
+Dependiendo de las necesidades de cada proyecto, se puede definir que el tronco sólo
+tenga versiones en producción o versiones entregadas a pruebas (pruebas de certificación del cliente).
+
+
+---Rama de desarrollo (develop)
+
+Al iniciar el desarrollo, se debe crear una rama protegida sobre la
+cual se van a realizar los merges de las diferentes “features” que se van agregando.
+De esta rama se pueden desprender sub-ramas, para la adición de “features” o la corrección de bugs.
+
+
+---Rama de funcionalidad (feature/XXX)
+
+Con la adición de una nueva característica al producto
+se debe crear una rama (local o remota) no protegida, a partir de la rama de desarrollo.
+La creación de esta rama es opcional dependiendo del
+tipo de versionamiento (distribuido o centralizado) y de las adaptaciones particulares de cada proyecto.
+
+" Para proyectos ágiles, podrían haber ramas por sprint o por historias de usuario y
+no deberían durar más de un ciclo de desarrollo.
+
+El formato para la creación de ramas de funcionalidad es:
+
+feature/[nombre funcionalidad]
+
+Por ejemplo:
+
+feature/hu20 "
+
+
+---Rama de entrega (release/XXX)
+
+Cuando se han agregado suficientes funcionalidades a la rama de desarrollo
+o cuando se acerca la fecha de una entrega, se debe crear una rama de release protegida.
+A esta rama no se deben agregar más funcionalidades,
+sólo corrección de defectos o documentación para el release.
+
+El formato para la creación de ramas de entrega es:
+
+release/[nombre entrega]
+
+Por ejemplo:
+
+release/Sprint1
+
+
+---Rama de correcciones (hotfix /XXX)
+
+En ocasiones particulares se requiere corregir un error de una
+versión entregada al cliente (producción o pruebas del cliente).
+En este caso es válido crear una rama “temporal” no protegida para la corrección del error,
+garantizando que después, se integre con el tronco y con las ramas de desarrollo/release que se encuentren activas.
+
+El formato para la creación de ramas de corrección es:
+
+hotfix/[nombre corrección]
+
+Por ejemplo:
+
+hotfix/ticket001
+
+
+---Tags (vX.Y.Z)
+
+Aunque internamente, una rama y un tag son manejados de la misma forma, conceptualmente son diferentes.
+El tag es una “foto” del estado del producto en un momento específico, por lo cual, deben ser sólo de lectura.
+Cuando se genera una versión estable en producción o para pruebas de certificación se debe
+crear un tag que la identifique. 
+
+El formato para la creación de tags es el siguiente, bajo la Definición de numeración de versiones:
+
+v[X.Y.Z]
+
+Por ejemplo:
+
+v1.0.3
+
+
+---Rama de soporte (support/XXX)
+
+Esta rama es utilizada en proyectos que desarrollan un producto y
+se debe dar soporte aversiones anteriores desplegadas en clientes.
+Dentro del contexto del flujo, éstas ramas deben ser creadas al momento de crear un TAG.
+
+El formato para la creación de ramas de soporte es:
+
+soporte/[nombre ticket]
+
+Por ejemplo:
+
+soporte/ticket001
+
+
+
+---Roles
+
+En el flujo de trabajo con GIT se definen los siguiente roles:
+
+- Developer
+Este rol tiene permisos para:
+
+Descargar el proyecto
+Crear ramas
+Hacer push a ramas no protegidas
+Eliminar ramas no protegidas
+Agregar Tags
+
+- Master 
+Este rol hereda los permisos del Developer y además tiene permisos para:
+
+Hacer push a ramas protegidas
+Habilitar/deshabilitar protección de ramas
+Editar/eliminar tags
+Adicionar miembros a equipos
+Editar proyectos
+
+- Owner (Infraestructura)
+Este rol hereda los permisos del Master y además tiene permisos para:
+
+Administración de proyectos
+Creación/edición/eliminación de grupos
+Administración de miembros de grupos
+Este rol sólo debe ser asignado por infraestructura.
+
+
+---Grupos
+
+La creación de grupos estará a cargo de infraestructura y
+se debe solicitar por medio de un ticket de soporte (Scarab). 
+
+Como estándar, se creará un Grupo para un producto específico de una marca,
+por ejemplo, para el producto Helm Persona Jurídica, se debe crear
+un Grupo con el formato definido en la sección Nomenclatura, en el que se crearán los Proyectos requeridos.
+
+Nomenclatura
+Para la creación de Grupos, se debe seguir el siguiente formato:
+
+[Nombre Cliente]_[Nombre producto]
+
+
+
+---Proyectos
+La creación de Proyectos estará a cargo del rol Master de cada equipo y queda a criterio del equipo. 
+
+Se aconseja agrupar “proyectos” (proyectos en Eclipse/NetBeans,
+Soluciones/Proyectos en Visual Studio o agrupación de módulos) que tengan
+dependencia en tiempo de compilación/construcción dentro de cada Proyecto (Repositorio) de GitLab.
+
+Nomenclatura
+Para la creación de Proyectos, se debe seguir el siguiente formato:
+
+[Nombre Proyecto]
+
+Nota:
+Todos los proyectos deben ser creados con visibilidad Private
+(https://git.pragma.com.co/help/public_access/public_access).
+Esto garantiza que sólo los miembros del Grupo/Proyecto pueden tener acceso a él.
+
+
+

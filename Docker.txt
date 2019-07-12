@@ -1,0 +1,295 @@
+Informacion de Docker
+
+----
+Informacion general:
+(Docker se basa en el lenguaje de programacion de Google (GO))
+
+imagenes
+Plantillas de solo lectura vacia o con una aplicacion preinstalada para la creacion de contenedores.
+puede ser creada por nosotros o por la comunidad (Docker Hub ó Docker search)
+
+Contenedores
+Contiene lo necesario para ejecutar aplicaciones
+estos estan basados en una o mas imagenes
+
+
+----
+
+----
+Comandos del Tutorial
+git clone https://github.com/docker/doodle.git                  // Para clonar un repositorio de docker
+
+cd doodle\cheers2019 ;                                          // Posicionarnos en la carpeta de doodle
+docker build -t santiagopragma/cheers2019                       // Comando para crear una Imagen Docker en nuestro repositorio local
+
+docker run -it --rm santiagopragma/cheers2019                   // Comando para correr el contenedor
+
+docker login ;                                                  // Iniciar Sesion en Docker
+docker push santiagopragma/cheers2019                           // Compartir repositorio en DockerHub
+
+----
+
+----
+Posibles Errores de Docker
+
+Docker i/o timeout error on Windows    (Error sin solucionar)
+https://kumarvikram.com/docker-io-timeout-error-resolved-windows/
+
+----
+
+
+---------------------
+COMANDOS
+CTRL + C; para interrumpir el comando el cual se esta ejecutando. (parar el contenedor en el que estamos)
+CTRL + D; comando para salirse de un contenedor en el cual se esta trabajando con bash por ejemplo.
+(se utiliza Ctrl + D cuando se activa bash dentro de un contenedor, y se utiliza Ctrl + C, cuando no estas dentro de un contenedor
+pero requieres interrumpir algun comando anteriormente ejecutado).
+mas info: https://vsupalov.com/exit-docker-container/
+
+CTRL + P + Q; secuencia de teclas para salirse de un contenedor sin matarlo. (pararlo)
+
+docker;
+Para saber si docker esta instalado en el pc.
+
+docker info;
+Muestra toda la informacion de docker, cantidad de contenedores, cuantos estan activos, pausados o detenidos,
+numero de imagenes, version de Servidor, de Kernel, del sistema operativo, plugins, arquitectura, CPUs memoria, etc...
+docker version
+
+docker search 'param';
+Ejemplo, docker search ubuntu
+Nos trae una lista de Imagenes disponibles para hacer pull desde el repositorio de docker (hub.docker.com)
+esta lista muestra el Nombre, Descripcion, Stars(Valorizacion), Oficial, automated. de cada Imagen.
+tambien se le puede enviar en el parametro la version que se desea buscar; docker search ubuntu:14.04
+
+docker pull 'param';
+Ejemplo, docker pull ubuntu
+Comienza a descargar la Imagen que le pedimos (puede descargar varias capas de la imagen).
+tambien se le puede enviar en el parametro la version que se desea descargar; docker search ubuntu 14.04
+
+docker images;
+Retorna una lista de imagenes que han sido descargadas previamente.
+retorna la siguiente informacion:
+Repositorio (Nombre del repositorio)
+TAG (version o etiqueta del repositorio)
+IMAGE ID (Id de la imagen, este es importante por que los contenedores hacen referencia a dicho ID)
+CREATED (Fecha en la cual fue creada la imagen)
+SIZE (Tamaño de la imagen)
+
+docker run 'param';
+recibe como parametro el nombre de la imagen que se quiere crear dentro de un contenedor.
+si el parametro (nombre de imagen) no existe localmente, la descargara del repositorio en la nube.
+
+docker ps;
+retorna una lista de contenedores que esten actualmente activos (En Ejecucion)
+muestra la siguiente informacion de C/U:
+CONTAINER ID (ID unico del contenedor)
+IMAGE (nombre de la imagen de ese contenedor)
+COMMAND (??? = comandos internos de la imagen (?))
+CREATED (Fecha en la cual fue creado el contenedor)
+STATUS (Estado del contenedor ... ???)
+PORTS (Puertos de acceso)
+NAMES (Nombre ... ???)
+
+docker ps -a; (--all    Show all containers (default shows just running))
+muestra todos los contenedores que existen en este momento en docker.
+
+docker rm 'param';
+recibe como parametro el ID de un contenedor o el inicio del ID (Siempre y cuando sea Unico)
+comando para eliminar un contenedor.
+
+docker rmi 'param';
+recibe como parametro el ID de la imagen.
+comando para eliminar una Imagen.
+
+docker run -i -t 'param' 'command';
+-i; bandera para estandar input.
+-t; bandera para tener una pseudoterminal.
+-i -t; segun el tutorial, sirven para que sea interactivo y se cree una terminal del contenedor;
+recibe como parametro el nombre de la imagen y comando que se desea utilizar.
+este comando solo funciona con imagenes que sea compatibles con dicha interactividad.
+al ejecutar este comando, se cambia la direccion en la que se esta posicionado, y quedamos dentro del contenedor.
+EJ:
+docker run -i -t ubuntu bash  -> nos movemos a la direccion root@...
+root@'ID_CONTAINER':/#
+
+docker run --name 'name' -it 'param';
+-it; habilitar interactividad y consola.
+recibe como parametro 'name' el nombre el cual le deseamos colocar al contenedor.
+recibe como parametro 'param' el nombre de la imagen que queremos utilizar dentro del contenedor.
+al ejecutar este comando, se crea el contenedor con el nombre que le mandamos en el parametro 'name'.
+
+docker 'command' --help;
+retorna la informacion de este comando de una manera mas explicita,
+explicando varias opciones para utilizar del comando.
+
+docker start 'param';
+recibe como parametro el ID del contenedor a inicializar
+comando para inicializar un contenedor que estaba parado.
+
+docker stop 'param';
+recibe como parametro el ID del contenedor a parar
+comando para parar un contenedor que esta activo.
+
+exit;
+comando para salirse de la consola del contenedor en el que estamos parados actualmente
+
+docker attach 'param';
+recibe como parametro el id del contenedor al cual nos queremos conectar.
+
+docker commit 'param' 'name';
+recibe como parametro el id del contenedor.
+recibe como parametro 'name' el nombre que deseamos para esta imagen.
+crea una imagen en base a la imagen que le enviemos como primer parametro.
+
+docker build -t 'name' 'rootDockerfile'
+recibe como parametro 'name' el nombre de la imagen
+recibe como parametro 'rootDockerfile' la ruta del archivo Dockerfile
+Comando para crear/construir una imagen tomando como base el archivo Dockerfile con todas sus especificaciones.
+EJ:
+docker build -t webimage C:\Users\santiago.montoya\Desktop\miweb\
+donde webimage es el nombre que tendra la imagen
+y la ruta es donde esta el archivo Dockerfile
+---------------------
+
+---------
+dentro de la consola bash del contenedor     (Ubuntu)
+apt-get update;
+comando para actualizar las dependencias de ubuntu o de la imagen en la cual estamos trabajando.
+
+apt-get install 'param';
+recibe como parametro el nombre de la aplicacion que se desea instalar.
+comando para instalar alguna aplicacion dentro del contenedor.
+EJ:
+apt-get install nano
+instala el editor de texto 'nano' y se puede utilizar por medio del bash.
+
+apt-get remove 'param';
+recibe como parametro el nombre de la aplicacion que se desea desinstalar.
+comando para eliminar alguna aplicacion dentro del contenedor.
+EJ:
+apt-get remove nano
+desinstala el editor de texto 'nano' del contenedor.
+
+-
+
+Instalando Apache2 en el contenedor
+apt-get install apache2
+
+service apache2 status;
+comando para validar el estado de apache dentro del contenedor.
+
+service apache2 start;
+comando para inicializar apache dentro del contenedor.
+
+
+
+---------
+
+---------
+docker commit --change='CMD ["apache2ctl", "-D FOREGROUND"]' -c "EXPOSE 85" 'param' 'name'
+docker commit --change="CMD [\"apache2ctl\", \"-D FOREGROUND\"]" -c "EXPOSE 85" 6bd47ed5c181 apache2
+
+comillas dobles en change y backSlash(\) en las comillas dobles de adentro del primer parametro, para que funcione
+correctamente el comando.
+
+ejecutar un CMD (comando) para ejecutar el servicio apache2ctl mas comando -D FOREGROUND y -c "EXPOSE 85"
+comando para crear en base a algunos parametros;
+85 equivale al puerto en el cual va estar por defecto
+recibe un parametro que es el Id del contenedor del cual queremos crear la imagen.
+recibe un nombre como parametro para indicar el nombre de nuestro contenedor.
+
+docker run -d -p 5000:80 apache2
+crear una imagen en base a apache2 asignadole un puerto 5000:80 (-p).
+---------
+
+---------------------
+Dockerfile - EL ARCHIVO NO DEBE DE TENER NINGUNA EXTENSION Y SE DEBE LLAMAR Dockerfile
+Documento de texto que contiene todos los comandos que un usuario puede llamar a la linea de comandos para montar una imagen.
+
+-------------ESTRUCTURA ESTANDAR DE UN DOCKERFILE - INICIO -------------
+
+FROM 'ImageName'                                    -- Define una imagen base para crear nueva imagen con Dockerfile.
+    EJ: FROM Ubuntu:16.04
+MAINTAINER 'AuthorName (Maintainer) - Version'      -- Hace referencia al creador del Dockerfile.
+    EJ: MAINTAINER Santiago Montoya santiago.montoya@pragma.com.co
+RUN 'Commands to execute'                           -- Permite ejecutar comandos en la imagen base antes de ser creada.
+    EJ: RUN apt-get update && apt-get install apache2
+ADD/COPY 'Add or copy files to the image'           -- Permite copiar o agregar un archivo a la imagen.
+    EJ: ADD index.html /var/www/html
+EXPOSE 'PortNumber'                                 -- Nos permite exponer por defecto un puerto para el contenedor.
+    EJ: EXPOSE 8080
+CMD 'Commands to execute'                           -- Ejecutar accion por defecto al crear el contenedor. (Es la finalidad).
+    EJ: CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
+-------------ESTRUCTURA ESTANDAR DE UN DOCKERFILE - FIN    -------------
+
+
+
+---- EJEMPLO ESTRCUTURA Dockerfile - INICIO ----
+
+FROM ubuntu:16.04
+MAINTAINER SantiagoMontoya santiago.montoya@pragma.com.co
+RUN apt-get update
+RUN apt-get -y install apache2
+EXPOSE 81
+CMD /usr/sbin/apache2ctl -D FOREGROUND
+
+---- EJEMPLO ESTRCUTURA Dockerfile - INICIO ----
+
+--- EJEMPLO 1 - INICIO ---
+
+FROM ubuntu:16.04
+MAINTAINER SantiagoMontoya santiago.montoya@pragma.com.co
+RUN apt-get update
+RUN apt-get -y install apache2
+RUN apt-get -y install wget
+RUN apt-get -y install unzip
+RUN wget https://github.com/BlackrockDigital/startbootstrap-freelancer/archive/gh-pages.zip
+RUN unzip gh-pages.zip
+RUN cp -a /startbootstrap-freelancer-gh-pages/* var/www/html
+EXPOSE 82
+CMD /usr/sbin/apache2ctl -D FOREGROUND
+
+--- EJEMPLO 1 - FIN ---
+
+
+
+--- EJEMPLO 2 - INICIO ---
+
+FROM ubuntu:16.04
+MAINTAINER SantiagoMontoya santiago.montoya@pragma.com.co
+RUN apt-get update
+RUN apt-get -y install apache2
+EXPOSE 81
+CMD /usr/sbin/apache2ctl -D FOREGROUND
+
+--- EJEMPLO 2 - FIN ---
+
+
+-------- POSIBLE ERROR - INICIO --------
+
+Dentro del contenedor que se cree con alguna imagen de ubuntu, y se trata de instalar
+alguna aplicacion como lo es Docker, git, etc. y sale un mensaje 'E: Unable to locate package ...'
+
+ejecutar el comando 'apt-get update' para actualizar ubuntu.
+
+mas informacion;
+https://stackoverflow.com/questions/29929534/docker-error-unable-to-locate-package-git
+
+
+
+-------- POSIBLE ERROR - FIN --------
+
+
+INSTALAR KUBERNETES EN UBUNTU TUTORIAL
+https://ubunlog.com/como-instalar-kubernetes-en-ubuntu-y-derivados-y-crear-dos-nodos/
+https://ricardogeek.com/como-instalar-kubernetes-facilmente-en-ubuntu/
+
+
+---------------------
+
+
+Informacion adicional
+
+https://stackoverflow.com/questions/19897743/exposing-a-port-on-a-live-docker-container
+https://stackoverflow.com/questions/17157721/how-to-get-a-docker-containers-ip-address-from-the-host

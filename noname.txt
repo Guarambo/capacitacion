@@ -1,0 +1,26 @@
+Office
+Outlook
+OneNote
+PowerPoint
+Skype
+OneDrive
+Word
+Excel
+Lenovo Vantage
+
+
+Lenovo System Interface Foundation for Win10
+
+https://www.adslzone.net/windows-10/evitar-portatil-suspenda-cerrar-tapa/
+
+
+
+Arreglar error del pom.xml
+https://stackoverflow.com/questions/56142369/why-am-i-getting-unknown-error-in-line-1-of-pom-xml
+
+
+
+user XAMPP
+
+root        kappa123
+guarambo    kappa123

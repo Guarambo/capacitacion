@@ -1,0 +1,323 @@
+Estandar Java
+
+---------------------- Convenciones de Nomenclatura ----------------------
+
+
+--- Nombre de paquetes
+
+Correcto
+    com.company.ui
+    com.companysausa.userinterface
+
+
+Incorrecto
+    com.company.user_interface
+    com.company.User_Interface
+
+
+--- Nombre que representan tipo (Clases o Interfaces)
+
+Correcto
+    class FoodItem
+    Interface DisableInterface
+    class InventoryItem
+
+
+Incorrecto
+    class fooditem
+    class Crackers
+    interface Eat
+    class Inventory_item
+
+
+--- Nombre de variables
+
+Correcto
+    Item menuItem
+    JPanel managerJPanel
+
+
+Incorrecto
+    JPanel Managerpanel
+    JPanel Manager_panel
+    int _localInt, InventoryItem
+
+
+--- Nombre de Constantes
+
+(Variables de tipo final)
+
+Correcto
+    public final static int MAX_AGE = 100;
+    public final static Color RED = new Color(count++);
+
+
+Incorrecto
+    publiC final static int MAXAGE = 100;
+    public final static int maxAge = 100;
+    public final static int MaxAge = 100;
+
+Por lo general se recomienda minimizar el uso de estas constantes.
+Una mejor opcion es implementar el valor como un metodo;
+Ej;
+
+Correcto
+    int getMaxIterations(){
+        return 25;
+    }
+
+Incorrecto
+    MAX_ITERATIONS = 25;
+
+Esta forma es mas facil de leer y asegura una interface uniforme 
+hacia los valores de la clase.
+
+
+--- Nombre de metodos
+
+Los nombres que representan un metodo deben ser verbos y escribirse
+con mayusculas y minusculas iniciando con minuscula. (Lower CamelCase)
+
+Correcto
+    label getTag();
+    void setWith(int);
+    void resetCounter();
+
+
+Incorrecto
+    label tagIs();
+    void counterNew();
+
+
+--- Abreviaturas y acrónimos
+
+Las abreviaturas y acrónimos no deberian estar con mayusculas cuando
+se usan como nombre:
+
+Correcto
+    exportHtmlSource();
+    openDvdPlayer();
+
+
+Incorrecto
+    exportHTMLSource();
+    openDVDPlayer();
+
+
+--- Variables genericas
+
+Las variables genericas deberian tener el mismo nombre que su tipo,
+o con una combinacion que incluya el tipo
+
+Correcto
+    Point startingPoint;
+    Point centerPoint;
+    Name loginName;
+    void setTopic(Topic topic);
+    void connect(Database database);
+
+
+Incorrecto
+    Point starting;
+    void setTopic(Topic value);
+    void setTopic(Topic aTopic);
+    void setTopic(Topic x);
+    void connect(Database db);
+    void connect(Database oracleDB);
+
+Reduce complejidad
+
+
+--- Idioma
+
+Todos lso nombres deberian escribirse en un soo idioma dentro
+de toda la aplicacion o proyecto.
+
+Ej:
+nombreArchivo; nombreUsuario;
+
+Se mantiene en ingles las palabras reservadas del lenguaje
+y prefijos de accesores.
+
+Ej:
+metodos; getNombreArchivo(); getNombreUsuario();
+
+
+--- Palabras reservadas
+
+abstract
+continue
+for      
+new         
+switch
+assert
+default
+goto
+package
+synchronized
+boolean
+do
+if
+private
+this
+break     
+double  
+implements
+protected
+throw
+byte      
+else     
+import      
+public        
+throws
+case     
+enum
+instanceof 
+return       
+transient
+catch    
+extends  
+int         
+short         
+try
+char     
+final   
+interface  
+static        
+void
+class     
+finally 
+long        
+strictfp      
+volatile
+const     
+float   
+native      
+super         
+while
+
+
+--- Nombres de variables.
+
+Nombres de variables con un ámbito amplio deberían tener nombres largos,
+las variables con ámbito pequeño deberían tener nombres pequeños.
+
+Las variables descartables utilizadas para el almacenamiento temporal o
+índices es mejor que sean cortas. Un programador que lee dichas variables
+debería poder asumir que su valor no se utiliza más allá de unas pocas líneas de código. 
+
+Las variables descartables comunes para los enteros son i, j, k, m, n y para los caracteres c y d.
+
+El nombre del objeto está implícito y debería evitarse en un nombre de método.
+Ej:
+
+Correcto
+    line.getLength();
+
+
+Incorrecto
+    line.getLineLength();
+
+
+
+--- Convenciones de nomenclatura especificas
+
+Terminos get/set
+
+
+Los términos get/set se deben utilizar cuando un atributo se accede directamente.
+
+employee.getName(); 
+matrix.getElement (2, 4); 
+employee.setName (name); 
+matrix.setElement (2, 4, value);
+
+Ejemplo: 
+
+Atributo(s):
+   int useCounter;
+Getter:
+   int getUseCounter(){
+      return useCounter;
+   }
+Setter(s):
+   void setUseCounter(int count){
+      useCounter = count;
+   }
+
+Correcto:
+   void incrementUseCounter() {
+      setUseCounter(getUseCounter()+1);
+   }
+   void decrementUseCounter() {
+      setUseCounter(getUseCounter()-1);
+   }
+
+Incorrecto:
+  useCounter = useCounter +1;
+  useCounter = useCounter -1;
+
+
+--- Metodos booleanos
+
+Correcto
+    isVisible, isFinished, isFound, isOpem.
+
+
+Incorrecto
+    visible, finished, found, open.
+
+Hay unas cuantas alternativas que encajan mejor que el prefijo is en algunas
+situaciones. Estos son los prefijos has, can, y should.
+
+boolean hasLicense(); boolean canEvaluate(); boolean shouldAbort = false;
+
+
+--- Forma plural de las colecciones
+
+La forma plural debe utilizarse en nombres que representen una colección de objetos.
+
+Correcto
+    Collection points;
+    int[] valuesPoints;
+
+Incorrecto
+    Collection point;
+    int[] value;
+
+
+--- Nombres complementarios deben usarse para las entidades complementarias
+
+Esto reduce la complejidad con base a la simetria.
+
+get/set, add/remove, create/destroy, start/stop, insert/delete,increment/decrement, old/new,
+begin/end, first/last, up/down, min/max,next/previous, old/new, open/close, show/hide
+
+
+
+--- Variables booleanas negadas deben evitarse.
+
+Correcto
+    boolean isError;
+Incorrecto
+    boolean isNotError;
+
+Correcto
+    boolean isFound;
+Incorrecto
+    boolean isNotFound;
+
+El problema surge cuando el operador lógico no se usa y surge una doble negación.
+No es muy claro inicialmente el significado de !isNotError
+
+
+--- Clases exception deben de tener como sufijo Exception
+
+class AccessException
+
+
+
+
+--- Voy en 6 - Espacios en blanco
+---
+

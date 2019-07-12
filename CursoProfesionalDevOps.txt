@@ -1,0 +1,28 @@
+Curso profesiona del DevOps
+
+---------------- TABLA PERIODICA DE HERRAMIENTAS DE DEVOPS ----------------
+https://xebialabs.com/periodic-table-of-devops-tools/
+---------------------------------------------------------------------------
+
+
+- Continuous Integration (CI)
+
+Es un FLUJO DE TRABAJO que se usa en equipos de programadores y facilita la adicion de
+funcionalidades a los productos.
+
+Cada programador agrega grupos de cambios a la rama de codigo principal y estos se validan
+por medio de PRUEBAS AUTOMATICAS n un servidor de "Testing".
+
+
+
+- Continuous Delivery (CD)
+
+Es una extension de CI que automatiza todo el proceso de AÑADIR CODIGO A LA RAMA PRINCIPAL,
+de forma que se puede hacer deploy a produccion en cualquier momento de forma manual y segura.
+
+- Continuous Deployment (CD)
+
+Los cambios se ven en minutos y recibes feedback de los clientes para iterar rapidamente.
+
+
+"La clave esta en la Automatizacion"

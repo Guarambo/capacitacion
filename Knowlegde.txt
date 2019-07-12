@@ -1,0 +1,91 @@
+netbeans-8.0.2-javaee-windows.exe --javahome "C:\\Program Files\Java\jdk-12"
+
+Alt + Shift = Change Keyboard Language          -----
+
+eclipse Shortcuts
+Ctrl + i = Correct Indentation.
+Ctrl + Shift + f = just format (use Ctrl i).
+
+---------------------------
+
+Herencia multiple (existe para las interfaces ?)
+Ej:
+
+public interface Visualizable extends IReadable, Serializable {
+    ... methods.
+}
+
+---------------------------
+
+
+---------------------------
+Cambiar DNS
+https://www.windowscentral.com/how-change-your-pcs-dns-settings-windows-10
+---------------------------
+
+
+---------------------------
+
+Info XAMPP -- C:\xampp
+
+xampp-control       App
+http://localhost/phpmyadmin/
+
+User    -   Pasw
+amazonviewer    -   amazonviewer
+
+mysql connector .jar (https://dev.mysql.com/downloads/connector/j/     -- Select "Platform Independent")
+
+
+---------------------------
+
+Predicator y Consumer ... Estudiar
+    
+---------------------------
+
+---------------------------
+Pagina de REST con Spring (informacion adicional de JUnit etc..)
+https://www.baeldung.com/junit-5-runwith
+
+---------------------------
+
+---------------------------
+Git
+
+On Windows 10 before 1703, or when Developer Mode is turned off,
+special permissions are required when cloning repositories with symbolic links,
+therefore support for symbolic links is disabled by default. Use git clone -c core.symlinks=true <URL> to enable it
+---------------------------
+
+
+
+---------------------------
+Generar .jar
+desde STS se hace click derecho al proyecto, luego Run As, Maven Build y en goals escribir Package.
+---------------------------
+
+
+
+--------------------------- Informacion Capacitacion ---------------------------
+EstadoCapacitacion      -       Nombre                  -       InformacionAdicional
+DONE                    -       Java EE                 -       Continuar con hilos y mas en pildorasInformaticas
+DONE                    -       Spring Boot             -       (?)
+DONE                    -       Introduccion a Docker   -       Repasar comandos de docker (ver Docker.txt)
+DONE                    -       MicroServicios          -       Estudiar por cuenta propia, mas informacion de MicroServicios
+DONE                    -       Estandar Java           -       (Lectura de un documento)
+STANBY                  -       Estandar versionamiento -       (Lectura de un documento)
+STANBY                  -       Estandar seguridad      -       (Lectura de un documento y video)
+STANBY                  -       JUnit+Mockito+Jacoco    -       (Estudiar, son muchos links de videos y doctos)
+STANBY                  -       Desarrollo Web          -       Curso de platzi https://platzi.com/clases/html5-css3/
+
+
+
+
+
+--------------------------- Informacion Capacitacion ---------------------------
+
+
+--------------------------- Informacion Devops ---------------------------
+EstadoCapacitacion      -       Nombre                  -       InformacionAdicional
+DONE                    -       Devops For Dummies      -       (Leer documento)
+STANBY                  -       COMMING SOON            -       COMMING SOON

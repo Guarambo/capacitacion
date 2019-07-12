@@ -1,0 +1,334 @@
+los microservicios estan divididos en mas microservicios
+
+Microservicios
+Esta dividido en 3 secciones;
+- Data Layer
+- Composition Layer
+- API Layer
+
+
+Cada microservicio llama a otro microservicio;
+Edge Server (External) -> API Service -> Business Service -> Data Services -> BD
+
+--API Layer
+API Services
+
+--Composition Layer
+tiene varios servicios de Logica de Negocio para la funcionalidad. "Business Services"
+
+--Data Layer
+tiene varios servicios de data "Data Services" para el acceso a BD
+
+
+Registry Service (External)
+Este servicio expone la ubicacion del resto de servicios que estan dentro de las layers (MicroServicios)
+(ip y puerto)
+
+Config Service (External)
+Es el servicio que controla la configuracion de cada uno de los microservicios.
+lo que permite esto es, poder hacer algun cambio en la configuracion que se planee implementar en 
+algun microservicio en caliente, sin que afecte la aplicacion.
+
+Esta configuracion casi siempre es externa a los microservicios;
+puede estar en Github o algun repositorio externo.
+
+Authorization Server (External)
+va de la mano del Edge Server, y es este es el que hace las respectivas validaciones/autenticaciones
+
+Edge Server (External)
+Este es el que da la cara al usuario.
+Este es con el que El cliente interactua
+
+
+Dentro de la clase java en el cual esta el metodo main
+se agrega dos etiquetas
+
+-----------------------------------------------------------------
+
+@SpringBootApplication
+@RestController
+
+SpringBootApplication Indica que esto es una aplicacion de Spring Boot
+RestController Crea un Servicio Spring REST
+
+cuando un metodo tiene la etiqueta @Requestmapping("main")
+Este indica una relacion entre una peticion HTTP(localhost:8080/main) con el metodo que tenga dicha etiqueta y ruta.
+
+Ej:
+HTTP(localhost:8080/main) -> metodo saludar();
+
+
+@Requestmapping("main")
+public String saludar(){
+    return "hola mundo";
+}
+
+-----------------------------------------------------------------
+
+-------------- Server Config --------------
+
+- Se crea proyecto con web Server como Dependencia
+- Se importa a STS, y en la clase donde esta el main se agrega la etiqueta
+@EnableConfigServer
+Ej:
+
+@SpringBootApplication
+@EnableConfigServer
+public class ServConfigApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ServConfigApplication.class, args);
+	}
+
+}
+
+- Despues dentro de la carpeta de Resources se crean dos archivos;
+
+- application.yml
+server:
+  port: 8888
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: file:///C:/Users/santiago.montoya/Documents/configuraciones
+
+
+
+
+- bootstrap.yml
+spring:
+  application:
+    name: ServerConfig
+
+
+Se compila y se ejecuta, no deberia de ocurrir ningun error.
+
+-------------- Server Config --------------
+
+-------------- Microservicio 'uno' y 'dos' - INICIO --------------
+
+Un microservicio es un proyecto nuevo en el cual, si lo creamos por medio de start.spring.io 
+seleccionamos como dependencia WEB y Config Client que nos indica de que tipo son.
+
+Archivo 'bootstrap.yml' del Microservicio de tipo cliente;
+
+spring:
+  application:
+    name: MicroServiceUno
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+
+la seccion 'cloud' hace referencia a la direccion del servidor en el cual esta la configuracion
+del microservicio.
+
+el archivo .properties debe llamarse de acuerdo al nombre que le demos al microservicio;
+MicroServiceUno
+Ej:
+MicroServiceUno.properties
+
+Este debe estar guardado en la carpeta de configuraciones que es la que colocamos en
+'searchLocations: rootDirectory...' dentro del archivo application.yml del Servidor de configuraciones
+
+Dentro de este archivo se colocó la siguiente informacion;
+# properties
+server.port: 1234
+
+para el MicroServiceDos se repite lo mismo solo que el puerto es
+server.port: 4321
+
+
+-------------- Microservicio 'uno' y 'dos' - FIN --------------
+
+-------------- Servidor de Descubrimiento - INICIO --------------
+
+creamos un microservicio con las siguientes dependencias
+Web, Eureka Server, Config Client.
+
+se agrega una nueva etiqueta la clase principal
+@EnableEurekaServer
+
+Ej:
+
+@SpringBootApplication
+@EnableEurekaServer
+public class DiscoveryApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DiscoveryApplication.class, args);
+	}
+
+}
+
+se crea el archivo application.yml en la ruta src/main/resources
+con la siguiente informacion
+
+## YAML Template.
+server:
+  port: ${PORT:8761}
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enableSelfPreservation: true
+  instance:
+    hostname: localhost
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+
+----------- POSIBLE ERROR -----------
+Si al tratar de ejecutar, ocurre un error en el cual nos dice que no encuentra
+jaxb context, agregar las siguientes dependencias al proyecto (pom.xml)
+
+(Error salio ya que estoy utilizando OpenJDK 12)
+y jaxb funciona correctamente en java 8.
+jaxb es deprecado en java 9 y 10
+jaxb es eliminado de java 11 ... en adelante.
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.0.1</version>
+		</dependency>
+
+
+
+
+-------------- Servidor de Descubrimiento - FIN --------------
+
+
+
+-------------- Registrar Microservicios - INICIO --------------
+
+para registrar los microservicios creados anteriormente (uno y dos)
+hay que entrar primero a la clase principal de cada proyecto.
+Ej:
+unoApplication.java
+
+y agregamos la siguiente etiqueta '@EnableDisveryClient'
+Ej:
+@SpringBootApplication
+@EnableDiscoveryClient                  <----------
+public class UnoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(UnoApplication.class, args);
+	}
+
+}
+
+luego agregamos la siguiente dependencia:
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<version>1.4.4.RELEASE</version>
+		</dependency>
+
+
+Despues Ejecutamos en Orden lo siguiente ->
+
+ServConfig service
+Discovery service
+
+ahora ejecutamos los microservicios a los cuales se les haya agregado la etiqueta '@EnableDiscoveryClient'
+y dependencia 'spring-cloud-starter-eureka'
+
+entramos a la URL localhost:8761
+y apareceran las instancias en este momento registradas en eureka.
+
+-------------- Registrar Microservicios - FIN --------------
+
+
+
+-------------- Docker y MicroServicios - INICIO --------------
+
+Creamos un proyecto con la dependencia Web
+luego en el pom agregamos el siguiente plugin
+
+
+<plugin>
+  <groupId>com.spotify</groupId>
+  <artifactId>docker-maven-plugin</artifactId>
+  <version>0.4.13</version>
+  <configuration>
+      <imageName>${project.artifactId}</imageName>
+      <baseImage>jgeusebroek/minimal-jre-8</baseImage>
+      <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+      <resources>
+          <resource>
+              <targetPath>/</targetPath>
+              <directory>${project.build.directory}</directory>
+              <include>${project.build.finalName}.jar</include>
+          </resource>
+      </resources>
+  </configuration>
+  <executions>
+      <execution>
+          <id>build-image</id>
+          <phase>package</phase>
+          <goals>
+              <goal>build</goal>
+          </goals>
+      </execution>
+  </executions>
+</plugin>
+
+
+
+Despues, por linea de comandos, nos dirigimos a la carpeta del proyecto
+ejecutamos el comando 'mvn clean install' para crear el jar
+con el plugin anterior creara una imagen en base a ese jar.
+
+---------------------------------- NUEVOOOOOOOO -------------------------------
+Ayuda de Diseño del Dockerfile
+https://www.youtube.com/watch?v=6rGMvws--kk
+
+Actualizacion, como no me funciono al utilizar dicho plugin (no es capaz de generar la imagen)
+cree un Dockerfile con la siguiente estructura. para crear una imagen en base al jar y poderla guardar
+en el contenedor y ejecutarlo.
+
+------------- Archivo Dockerfile ------------- INICIO
+FROM openjdk
+
+COPY docker-*.jar /docker.jar
+
+CMD ["java", "-jar", "/docker.jar"]
+
+------------- Archivo Dockerfile ------------- FIN
+Comandos ejecutados
+para crear la imagen
+
+docker build -t dockerholamundorest C:\Users\santiago.montoya\Documents\stsProjects\docker\target
+
+crear el contenedor con la imagen 'dockerholamundorest'
+docker run -i -d -p 8080:8080 -t dockerholamundorest
+
+para mirar si funciona o no, entramos a la pagina localhost:8080
+y saldra un error por que no existe retorno de informacion.
+pero si escribimos localhost:8080/main
+nos retornara un Hola mundo. y por ende tenemos confirmado que el microservicio ya funciona
+(con un RestController para motrar el mensaje).
+
+-------------- Docker y MicroServicios - FIN --------------

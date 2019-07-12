@@ -1,0 +1,1008 @@
+------------------ Amazon Web Services (AWS)  - INICIO ------------------
+
+http://console.aws.amazon.com/
+
+
+---- Marco Buena Arquitectura ----
+se desarrollo para ayudar a los arquitectos que trabajan con la nube, a crear la infraestructura mas
+segura, resistente, eficaz y de alto rendimiento posible para sus aplicaciones.
+
+Mas Info:                   - https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf
+
+Se basa en cinco pilares;
+
+Excelencia operativa        - https://d1.awsstatic.com/whitepapers/architecture/AWS-Operational-Excellence-Pillar.pdf
+Seguridad                   - https://d1.awsstatic.com/whitepapers/architecture/AWS-Security-Pillar.pdf
+Fiabilidad                  - https://d1.awsstatic.com/whitepapers/architecture/AWS-Reliability-Pillar.pdf
+Eficiencia de rendimiento   - https://d1.awsstatic.com/whitepapers/architecture/AWS-Performance-Efficiency-Pillar.pdf
+Optimizacion de costos      - https://d1.awsstatic.com/whitepapers/architecture/AWS-Cost-Optimization-Pillar.pdf
+
+(Esto no es un mecanismo de auditoria)
+
+Excelencia Operativa;
+Capacidad de ejecutar y monitorear sistemas para entregar valor de negocio y mejorar continuamente
+los procesos y procedimientos de soporte.
+
+Seguridad:
+Capacidad de proteger la informacion, sistemas y bienes mientras se entrega el valor de negocio
+a traves de evaluaciones de riesgo y estrategias de mitigacion.
+
+Fiabilidad:
+Capacidad de un sistema de recuperarse de una interrupcion de servicio o infraestructura,
+adquiriendo dinamicamente recursos de computo para satisfacer la demanda, y mitigar las
+interrupciones como las configuraciones erroneas o problemas de red.
+
+Eficiencia de Rendimiento:
+Capacidad de usar los recursos de computo eficientemente para satisfacer los requerimientos del sistema,
+y para mantener esa eficiencia a medida que la demanda cambia y las tecnologias evolucionan.
+
+Optimizacion de Costos
+Capacidad inicializar el sistema para entregar valor comercial al menor precio posible.
+
+
+a menudo los ambientes de los clientes tienen un equipo de arquitectura tecnologica que actua para
+super ponerse sobre los otros equipos de  productos o equipos de caractereistica para asegurarse de
+que estan siguiendo las mejores practicas.
+
+los equipos de arquitectura tecnologica a menudo estan compuestos por los siguientes roles;
+Arquitecto Tecnico, Arquitecto de Soluciones, Arquitecto de informacion, Arquitecto de Redes, y
+Arquitecto de Seguridad.
+Estos equipos usan TOGAF o Zachman Framework como para de la capacidad de arquitectura empresarial.
+
+En AWS, prefieren distribuir esas capacidades en varios equipos en vez de tener uno solo con esas
+capacidades.
+
+
+---- Enfoque Buena Arquitectura ----
+
+-- Aplicacion sin servidor (Serverless)
+
+como diseñar, implementar y crear arquitecturas de cargas de trabajo de aplicaciones sin servidor
+en la nube de AWS.
+incluye casos como microservicios RESTful, backends para dispositivos moviles, procesamiento
+de transmisiones y aplicaciones web.
+con esto se aprenderan practicas recomendadas para crear cargas de trabajo de aplicaciones sin servidor en AWS
+
+Mas Info; - https://d1.awsstatic.com/whitepapers/architecture/AWS-Serverless-Applications-Lens.pdf
+
+
+-- Informacion de alto rendimiento (HPC)
+ 
+como diseñar, implementar y crear arquitecturas de cargas de trabajo de informatica de alto rendimiento (HPC)
+en la nube de AWS.
+incluye casos como informatica de alto rendimiento/estructura flexible
+informatica de alto rendimiento/estrcutura rigida.
+
+Mas Info; - https://d1.awsstatic.com/whitepapers/architecture/AWS-HPC-Lens.pdf
+
+
+-- IoT (Internet de las cosas)
+
+como diseñar, implementar y crear arquitecturas de carga de trabajo de IoT en la nube de AWS.
+aprovisionamiento de dispositivos, telemetria de dispositivos, comando de dispositivos y actualizaciones
+de firmware.
+
+Mas Info; - https://d1.awsstatic.com/whitepapers/architecture/AWS-IoT-Lens.pdf
+
+
+
+---- Herramienta de Buena Arquitectura ----
+
+'AWS Well-Architected Tool'
+por medio de esta herramienta podemos revisar el estado de carga de trabajo y permite comparar
+con respecto a las practicas recomendadas sobre arquitectura de AWS.
+Esta herramienta esta basada en el Marco de Buena Arquitectura de AWS.
+
+por medio de una serie de preguntas relacionadas a la arquitectura y a la carga de trabajo que uno
+desea implementar, esta herramienta nos muestra como resultado un plan de accion con una guia
+detallada sobre como crear mejores cargas de trabajo en la nube.
+
+tambien permite monitorizar el estado general de las multiples cargas de trabajo, conocer su estado
+general y ayuda a comprender posibles riesgos potenciales.
+con los resultados que se muestran en la herramienta podemos identificar los posibles proximos pasos
+a fin de mejorar, impulsar las decisiones sobre la arquitectura e integrar las consideraciones sobre
+la arquitectura a su proceso de control corporativo.
+
+la herramienta permite guardar hitos puntuales y hacer un seguimiento de los cambios en su carga de trabajo.
+se puede crear un nuevo proceso de revision para garantizar que la arquitectura sigue mejorando con el tiempo.
+
+
+-- Funcionamiento
+
+https://d1.awsstatic.com/Well%20Architected/How%20it%20Works.6877191cd131d35300b5b95082e267516dd970df.png
+
+
+
+
+---- Principios de Diseños Generales ----
+
+- Deja de adivinar la capacidad que requieres;
+
+Elimina ese pensamiento, cuando tomas una decision de la capacidad que requieres antes de correr
+el sistema, podrias quedarte sentado viendo costosos recursos inactivos para controlar
+las implicaciones de rendimiento de las capacidades limitadas.
+mientras que con 'Cloud Computing' esos problemas desaparecen; puedes usar cualquier cantidad
+que requieras, bien sea mucha o poca.
+
+
+- Sistemas de prueba a escala de produccion;
+
+en la nube, puedes crear un ambiente de pruebas para la escala de produccion en demanda,
+completar las pruebas, y quitar los recursos.
+por que solo pagas por el ambiente de pruebas cuando esta corriendo, puedes simular
+el ambiente en vivo por una fraccion del costo de las pruebas en las instalaciones.
+
+
+- Automatizar para facilitar la experimentacion arquitectonica;
+
+la automatizacion te permite crear y replicar tus sistemas a un bajo costo y evadir lo que implica
+el esfuerzo manual.
+puedes rastrear cambios de tu automatizacion, auditar los impactos, y volver a parametros anteriores
+cuando sea necesario.
+
+
+- Permitir las arquitecturas evolutivas;
+
+en un ambiente tradicional, las decisiones de arquitectura casi siemrpe son implementadas como estaticas,
+eventos unicos, con algunas versiones principales de un sistema durante su vida util.
+en la nube la capacidad de automatizar y hacer pruebas bajo demanda reduce el riesgo de impacto
+de los cambios de diseño.
+
+
+- Controlar arquitecturas usando datos;
+
+en la nube puedes recolectar la informacion sobre como las elecciones arquitectonicas afecta el
+comportamiento de la carga de trabajo.
+esto permite tomar decisiones basadas en hechos sobre como mejorar la carga de trabajo.
+su infraestructura de nube es el codigo, por lo que puede usar esos datos para informar sus opciones
+de arquitectura y mejoras a lo largo del tiempo.
+
+
+- Mejorar a traves de dias de juego;
+
+prueba como la arquitectura y los procesos por medio de una agenda de dias de juego regular para
+simular eventos en produccion.
+esto ayudara a entender donde se pueden aplicar mejoras y ayuda a la experiencia organizacional
+del manejo de eventos.
+
+
+---------------------------------------------
+Excelencia operativa
+
+hay tres areas de mejores practicas para la excelencia operativa en la nube;
+- Prepare
+- Operate
+- Evolve
+
+prepare
+Se requiere una preparacion eficaz para impulsar la excelencia operativa.
+el exito se logra mediante objetivos compartidos y comprension a traves del negocio, desarrollo
+y operaciones.
+Los estandares comunes simplifican el diseño y la gestion de carga de trabajo, lo que permite el
+exito operativo.
+diseñe cargas de trabajo con mecanismos para monitorear y obtener una vision de los componentes
+de la aplicacion, la plataforma y la infraestructura, asi como la experiencia y el comportamiento
+personalizados.
+
+operate
+comunicar el estado operacional de la carga de trabajo a traves de tableros, notificaciones etc...
+que vayan enfocados a la audiencia(cliente, negocio, desarrolladores, operaciones)
+para que puedan tomar una accion apropiada, asi las expectativas quedan controladas, para que esten
+informados cuando se reanuden las operaciones normales.
+
+evolve
+
+---------------------------------------------
+Seguridad
+
+hay 7 principios de diseño para la seguridad en la nube;
+
+- Implement a strong identity foundation
+implemente el principio de privilegios minimos y aplique la separacion de tareas con la autorizacion
+apropiada para cada interaccion con sus recursos de AWS.
+Centralice la gestion de privilegios y reduzca o incluse elimine la confianza de las credenciales
+a largo plazo.
+
+- Enable traceability
+Monitoreo, alertas, y auditorias de accion y cambio para el ambiente en tiempo real.
+Logs y metricas integradas con sistemas para responder automaticamente y tomar acciones.
+
+- Apply security at all layers
+no centrarse en la proteccion de una sola capa externa, aplique un enfoque de defensa en profundidad
+con otros controles de seguridad.
+aplique todas las capas (Ej: red de borde, VPC, subred, equilibrador de carga, cada instancia, sistema
+operativo y aplicacion).
+
+- Automate security best practices
+los mecanismos de seguridad automatizados basados en software mejoran su capacidad para escalar
+de manera segura, rapida y rentable.
+crear arquitecturas seguras, incluida la implementacion de controles que se definen y administran
+como codigos en plantillas controladas por versiones(version-controlled).
+
+- Protect data in transit and at rest
+Clasificar la informacion con niveles de sensibilidad y use mecanismos, como la encriptacion,
+tokenization, y control de acceso cuando sea apropiado.
+
+- Keep people away from data
+Crear mecanismos y herramientas para reducir o eliminar la necesidad de tener acceso directo o
+procesos manuales de la informacion.
+
+- Prepare for security events
+prepararse para un incidente teniendo un administrador de incidentes que se alinee con los
+requisitos de la organizacion.
+ejecute simulaciones de respuesta a incidentes y use herramientas con automatización para
+aumentar su velocidad de detección, investigación y recuperación.
+
+
+
+
+
+---- Amazon S3 (Amazon Simple Storage Service) ----
+
+es un servicio de almacenamiento para internet.
+esta diseñado para facilitar a los desarrolladores recursos de computacion escalables basados en web.
+
+tiene una interfaz de servicios web simple que puede utilizar para almacenar y recuperar cualquier
+cantidad de datos, en cualquier momentos, desde cualquier parte de la web.
+Ofrece a cualquier desarrollador acceso a la misma infraestructura de almacenamiento de datos económica,
+altamente escalable, fiable, segura y rápida que utiliza Amazon para mantener su propia
+red global de sitios web.
+Este servicio tiene como fin maximizar los beneficios del escalado y trasladarlos a los desarrolladores. 
+
+
+----- Beneficios -----
+
+
+-- Rendimiento, escalabilidad, disponibilidad y durabilidad lideres en el sector;
+Incremente o reduzca los recursas de almacenamiento para satisfacer la demanda fluctuante.
+
+
+-- Gran variedad de clases de almacenamiento rentables;
+Disminuir el costo sin sacrificar el rendimiento almacenando los datos en las distintas clases de
+almacenamiento de S3, que admiten varios niveles de acceso a los datos con sus tarifas correspondientes.
+
+esto se puede lograr por medio del 'Analisis de clases de almacenamiento de S3' que detecta datos
+que se pueden mover a clases mas baratas en funcion de los patrones de acceso.
+
+Estos objetos tienen una durabilidad de un 99,999999999 % durante un periodo de un año.
+lo que significa que  tiene una perdida de un 0,000000001 % de objetos; por ende
+con S3 se estaria perdiendo un objeto por cada 10 000 000 de años.
+
+Una buena y recomendada practica es hacer constantemente backups y tener protecciones para evitar
+eliminaciones 'accidentales o malintencionadas'.
+
+
+-- Capacidad de seguridad, conformidad y auditoria sin parangón;
+Amacenar los datos en Amazon S3 y protejalos frente a los accesos no autorizados con 
+caracteristicas de cifrado y herramientas de administracion de acceso.
+
+utilizando la herramienta que nos provee amazon; 'Amazon Macie' se podra identificar
+informacion que es confidencial y esta almacenada en los buckets de S3 y tambien se puede
+detectar solicitudes de acceso irregulares.
+
+amazon mantiene programas de conformidad, tales como: PCI-DSS, HIPAA/HITECH, FedRAMP,
+Directiva de proteccion de Datos de UE y FISMA para ayudar a cumplis los requisitos normativos.
+
+
+-- Herramientas de administracion ara el control detallado de los datos;
+amazon provee varias herramientas bastante utiles para poder administrar la informacion;
+- Analisis de clases de almacenamiento S3: para analizar patrones de acceso.
+- Politicas de ciclo de vida S3: para mover objetos a clases de almacenamiento mas baratas.
+- Replicacion entre regiones S3: para replicar datos en otras regiones.
+- Bloqueo de objetos S3: para aplicar fechas de retencion a los objetos y evitar su eliminacion.
+- Inventario S3: para obtener informacion sobre los objetos almacenados, sus metadatos y su estado
+de cifrado.
+- Operaciones por lotes S3: para cambiar propiedades de los objetos y realizar tareas de administracion
+del almacenamiento.
+
+por medio de AWS Lambda los clientes pueden registrar actividades, definir alertas y automatizar
+flujos de trabajo, sin tener que administrar ninguna infraestructura adicional.
+
+
+----- Casos de uso -----
+
+-- Copia de seguridad y restauracion
+Con AWS se pueden realizar copias de seguridad de los datos que ya se encuentran en la nube de AWS
+o utilizar AWS Storage Gateway que es un servicio hibrido para enviar copias de seguridad de datos
+locales a AWS.
+
+-- Recuperacion de desastres (DR)
+Proteja los datos, las aplicaciones y los sistemas de TI de importancia critica que se ejecutan en
+la nube de AWS o en el entorno local sin incurrir en los gastos que supone disponer de un segundo
+sitio fisico.
+con almacenamiento de Amazon S3 y la replicacion entre regiones de S3, puede crear arquitecturas
+de recuperacion de desastres para recuperarse de forma rapida y sencilla que fueron provocadas por
+desastres naturales, errores del sistema o errores humanos.
+
+por medio de S3 Glacier Deep Archive podemos crear la restauracion de datos y esto lo logra en un
+determinado tiempo dependiendo de que tipo de recuperacion es;
+- Recuperaciones rapidas; tarda un minuto.
+- Recuperaciones estandar; tarde entre 3 a 5 horas.
+
+las recuperaciones masivas desde S3 Glacier y S3 Glacier Deep Archive se llevan a cabo en un plazo
+de 12 horas.
+
+
+-- Lagos de datos y analisis de big data
+Existe algo llamado lagos de datos, y es por medio de herramientas podemos leer, analizar, consultar
+informacion que esta dentro de estos 'lagos'.
+
+Amazon tiene una herramienta para esto llamada AWS Lake Formation;
+que nos permite crear rapidamente estos lagos de datos, y tambien nos permite crear, definir y aplicar
+de forma centralizada politicas de seguridad, gobernanza y auditoria.
+Este servicio recopila datos de DB y los recursos del S3, los mueve a un lago de datos nuevo en
+amazon S3, los limpia y clasifica mediante algoritmos de aprendizaje automatico.
+
+
+
+
+----------------------------------- Creacion de un Bucket
+
+Dentro de los amazon S3 todo se almacena dentro de algo llamado 'bucket' (Cubeta - Balde)
+
+para crear un bucket hay que acceder a la consola de aws: https://console.aws.amazon.com/s3/
+dentro podremos crear un bucket;
+los buckets tiene nombre UNICO en todo Amazon S3, se recomienda que el nombre del bucket haga referencia
+a la informacion que planea almacenar. y debe ser un nombre prudente ya que este se mostrara en una URL.
+
+Despues de crear el bucket, se puede agregar un objeto, este objeto puede ser cualquier cosa;
+Archivo txt, imagen, video, etc.
+
+esto se hace seleccionando el bucket al cual queremos agregarle el archivo, se hace click en 'Cargar'.
+Nota: 
+si el archivo pesa mas de 80GB, este debe de cargarse por medio de la linea de comandos (CLI) de AWS.
+
+Estando dentro del bucket, podemos observar la lista de archivos que este contiene, y al seleccionar uno
+se muestra una informacion adicional de dicho archivo o si la queremos ver en gran tamaño hacemos click
+en el nombre del archivo, tambien se puede descargar, etc.
+
+tambien dentro del bucket se pueden crear carpetas;
+esto crea un 'objeto' que trendra un sufijo '/' y asi se muestra en forma de carpeta dentro de la consola
+de S3
+
+Dentro de las acciones de los buckets, podemos copiar, cortar, pegar archivos entre carpetas, etc.
+tambien esta la opcion eliminar. que si por alguna razon hiciste una copia de un archivo y lo moviste
+a otra carpeta, por buenas practicas se deberia de eliminar el archivo anterior. y asi tambien evitar
+incurrir en mas gastos, ya que AWS se cobra por cantidad de objetos existentes.
+
+tambien si se desea limpiar toda la informacion de un bucket (eliminar todo menos el bucket)
+en la vista donde se listan los buckets, podemos seleccionar uno y darle a la opcion 'Empty Bucket'
+(vacio - vaciar).
+
+los buckets son unicos para una cuenta, y pueden tener de foma predeterminada 100 buckets
+pero si se requiere tener mas, se pueden tener hasta 1000 por cuenta.
+
+los buckets son propios de la cuenta, y el titular es la cuenta creadora del bucket por ende si se
+desea 'transferir' un bucket de una cuenta a otra, esto es imposible.
+para hacer esto, tendria que estar el bucket vacio, luego eliminarse, y en la otra cuenta crear el
+bucket con el mismo nombre. (practicamente esto no es una transferencia)
+
+para ver mas restricciones de los buckets:
+https://docs.aws.amazon.com/es_es/AmazonS3/latest/dev/BucketRestrictions.html
+
+
+
+----------------------------------- Realizacion de solicitudes
+
+Amazon S3 es un servicio REST y toda interaccion con S3 debe ser autenticada o anonima.
+cuando la solicitud es autenticada deben de incluir una firma que autentique al remitente de la
+solicitud.
+El valor de esta firma se genera a partir del ID de clave de acceso y clave de acceso secreta.
+
+si se utiliza SDK de AWS, la firma se hace a partir de las claves que uno proporciona en el codigo.
+cuando hacemos una llamada directa a la API de REST, se debe de escribir el codigo para generar la
+firma y agregarla en la solicitud.
+
+
+------ Claves de Acceso a la cuenta de AWS
+Hay dos tipos de clave;
+
+- ID clave de acceso
+- Clave de acceso secreta
+
+ID clave de acceso es el identificador unico de una cuenta de AWS este es una cadena alfanumerica de
+20 caracteres. Ej; AKIAIOSFODNN7EXAMPLE
+
+Clave de acceso secreta es una cadena alfanumerica de 40 caracteres.
+Ej; wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+
+
+------ Herramienta IAM
+Claves de acceso de usuario de IAM
+
+utilizando AWS Identity and Access Management (IAM) se pueden crear usuarios en la cuenta principal
+asi se evitaria crear varias cuentas en AWS si estamos hablando de que varias personas en una empresa
+requieren de estar utilizando informacion de AWS.
+
+con esta herramienta, se puede crear usuarios con su propia clave de acceso y con permisos de acceso
+a recuersos adecuados.
+IAM permite crear grupos de usuarios y conceder permisos a nivel grupal que se aplican a todos los
+usuarios de ese grupo.
+
+la cuenta principal controla la capacidad de acceso a los usuarios.
+cualquier recurso creado or un usuario IAM es controlado y pagado por la cuenta principal de AWS.
+
+
+Tambien se pueden crear credenciales de seguridad temporales para uso propio de un usuario o para
+una determinada aplicacion que necesita tener acceso a algun objeto.
+
+----- Amazon S3 mediante IPv6
+se puede acceder a los buckets de S3 mediante Internet Protocol version 6, ademas del protocolo IPv4
+
+los puntos de enlace de doble pila de S3 admiten solicitudes a buckets a traves de IPv6 y IPv4.
+
+
+
+---- Amazon CloudFront ----
+
+Amazon CloudFront es un servicio web que acelera la distribucion de contenido web estatico y dinamico,
+como archivos .html, .css, .js y de imagenes, a los usuarios.
+
+CloudFront entrega el contenido a traves de una red mundial de centro de datos.
+cuando un usuario solicita contenido que se distribuye por medio de CloudFront, el usuario se redirige
+a la ubicacion de borde que ofrece la minima latencia, de modo que el contenido se distribuya
+con el mejor desempeño posible.
+
+- Si esta informacion se encuentra en la ubicacion con mas minima latencia posible, la retornara
+de inmediato, si no, CloudFront lo recupera de un origen que ha definido como un bucket de S3,
+un canal de MediaPackage o un servidor HTTP(Servidor web) que este como 'origen' de la version
+de dicho contenido.
+
+Cloudfront ayuda a agilizar la distribucion de estos contenidos dirigiendo cada solicitud de
+usuario a traves de la red de AWS hasta la ubicacion de borde que mejor ofrezca el contenido.
+
+
+es como un CDN  (Red de Distribucion de Contenido = Conentent Delivery Netwrok)
+
+Ejemplo:
+
+Se tiene un archivo, video, foto.
+cuando lo subes a CloudFront el se guarda en un Storage (S3 - bucket) luego si es un video
+este pasa por un 'Conversor de Archivos' que se llama 'AWS Elemental MediaConvert' el cual
+creara varias copias en tiempo real de dicho video y estos se los pasa a AWS CloudWatch
+y luego vuelve y lo pone en otro S3 que este va ser al cual las personas se van a conectar
+dependiendo de la localizacion de la persona, hay diferentes puntos de entrega, que nosotros
+le podemos asignar.
+
+lo que se logra con todo el proceso anterior, es que si un dispositivo requiere el video en una
+determinada calidad, pero tiene una señal no muy buena como 3G; entonces amazon detectando esa
+señal envia un video con la resolucion adecuada para que sea reproducido correctamente.
+pero si este dispositivo esta en una red Wi Fi con buen ancho de banda, amazon detectara eso
+y entregara el video con la resolucion mas alta disponible de ese video.
+
+
+para hacer uso de CloudFront los archivos que se deseen compartir se deben de guardar en un
+S3 (Bucket) publico y de manera publica tambien.
+
+
+Al entrar a CloudFront
+le damos en crear distribucion luego en Web y ya ahi empezar a modificar la configuracion de origen.
+
+-- Nombre de Dominio Origen:
+
+Como lo guardamos en un S3, nos aparecera listado los buckets que tenemos en nuestra cuenta.
+seleccionamos el que deseamos como origen (que sea publico).
+Despues colocamos el path o la direccion del archivo que deseamos compartir.
+
+Ej:
+dominio : platzi-cloudfront.s3.amazonaws.com
+path : /versionamiento.PNG
+
+el resto de opciones son para personalizar el cloudfront.
+tambien podemos indicar que vamos a usar una lambda, colocarle algun protocolo, etc.
+
+Creamos la distribucion
+
+
+
+--- COMO CREAR UN EC2 --- Curso Platzi
+
+Son maquinas virtuales en linea.
+se genera una unica clave para poder conectarse a un pc en especifico.
+
+
+EC2 key = Name - value = Curso-Platzi
+
+Otra forma es Descargar mobaXterm
+https://platzi.com/clases/1323-aws-cloud/12579-conectandonos-a-nuestra-instancia-desde-windows/
+y seguir los pasos del video para conectarse 
+
+
+por medio de la linea de comandos nos podemos conectar a la instancia del EC2
+leer:
+https://aws.amazon.com/es/getting-started/tutorials/launch-a-virtual-machine/?trk=gs_card
+
+
+comando:
+ssh -i {directorio del archivo .pem} ec2-user@IP 
+
+ec2-user es el usuario por defecto de Amazon Linux
+si fuera ubuntu, seria ubuntu.
+(dependiendo del tipo de maquina virtual que hayamos creado, es el usuario.)
+
+(Agregar conexion a Cmder para tenerla directa:
+https://medium.com/@erinus/cmder-setup-tasks-e5109bbb742b)
+
+
+-------- IMPORTANTE ******
+Si una instancia de EC2 no se puede eliminar, hay que ir a la opcion 'Auto Scaling Group'
+del menu de la pagina de EC2 y modificar la cantidad de instancias deseadas, minimas y maximas de
+dicho grupo y colocarlas en 0 para que asi no siga volviendo a inicializar el EC2.
+
+
+
+-------- Comandos dentro de AWS
+
+sudo su -> pasa del usuario ec2-user a usuario root
+yum update -> ejecuta las actualizaciones que se requieran.
+yum install -> para instalar alguna aplicacion (Ejemplo: yum install emacs       instala editor de texto)
+yum remove -> elimina alguna instalacion (Ejemplo: yum remove emacs)
+
+(Editor de texto utilizado - nano)
+por si se requiere instalar Java o una version mas actualizada Java
+https://www.youtube.com/watch?v=XGVOfm8VMTU
+https://stackoverflow.com/questions/10268583/downloading-java-jdk-on-linux-via-wget-is-shown-license-page-instead
+
+si la maquina no detecta el comando javac;
+instalar por medio del siguiente comando 'devel':
+    sudo yum install java-1.8.0-openjdk-devel
+
+para cambiar de version de java hay que hacer lo siguiente:
+    sudo /usr/sbin/alternatives --config java
+
+si se desea modificar algo mas:
+    sudo /usr/sbin/alternatives --config <name>
+<name> = el valor que deseamos modificar.
+
+
+Instalar maven dentro del EC2
+https://gist.github.com/sebsto/19b99f1fa1f32cae5d00
+
+Instalar apache tomcat
+https://www.youtube.com/watch?v=m21nFreFw8A
+
+
+aws configure list;
+muestra la configuracion de AWS en el cual estamos conectados.
+si este se encuentra vacio (Not Set / None) y se requiere de esta informacion se hace de la sig. manera;
+Mas informacion:
+https://docs.aws.amazon.com/es_es/cli/latest/userguide/cli-chap-configure.html
+
+aws configure
+nos pedira la 'Acces Key ID'
+luego 'Secret Access Key'
+luego 'Default region name'
+y por ultimo 'Default output format'
+
+EJEMPLO:
+
+AKIAQL3YYSTZOVDCRHWZ                        --> 'Acces Key ID'
+HWSIsUZrglV1b4vVlpruAUMmvksQFgIeKlmV9VWf    --> 'Secret Access Key'
+us-east-1                                   --> 'Default region name'
+json                                        --> 'Default output format'
+
+
+
+
+-------- AWS Lambda
+
+Ver mas a cerca de AWS:
+https://www.youtube.com/watch?v=mUGx2brCsAI
+
+Java AWS Lambda
+https://www.youtube.com/watch?v=zaWxdVUFFcE
+
+
+COMANDO aws configure
+
+Usuario: pruebalambda
+ID clave acceso:  AKIAQL3YYSTZOVDCRHWZ
+Clave secreta: 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
+Contraseña: 9Bi+stJ{$o0$
+
+
+
+
+tutorial para crear una lambda
+https://www.youtube.com/watch?v=mUGx2brCsAI
+
+Importante ****
+https://www.youtube.com/channel/UCq26S0TmKUeAVpi0Nqtb9qw/videos
+
+
+---------------- PARA CREAR UNA LAMBDA EN JAVA ----------------
+
+
+Debemos instalar dentro de Eclipse o STS;
+AWS Toolkit for Eclipse
+
+para instalarlo, solo hay que buscarlo en eclipse marketplace e instalarlo.
+pero si se hace por medio de STS y marca error, seguir los siguientes pasos
+
+Darle en Help, luego en Install New Software...
+
+luego en 'Work with:' colocar https://aws.amazon.com/eclipse
+darle en 'add' o agregar, luego esperar a que carguen las opciones disponibles a instalar
+seleccionar las que se necesite.
+
+luego darle next y empezara la instalacion.
+
+Para tener mas informacion de esta instalacion ver:
+https://docs.aws.amazon.com/es_es/toolkit-for-eclipse/v1/user-guide/setup-install.html
+
+
+--------- Pasos para crear la Lambda
+
+Crear un AWS Lambda Java project
+
+Modificar el InputType: colocar Custom
+
+luego dentro del metodo handleRequest(params)
+cambiar el parametro de tipo Object por String y cambiar tambien la prueba unitaria.
+luego colocar un return de String para probar la Lambda,
+cuando termine la modificacion darle click derecho al proyecto y click en export...
+crear un archivo .jar con el proyecto.
+
+luego con este, creamos la lambda, seleccionamos java 8, y seleccionamos este .jar para asi cargar
+el/los metodos, en 'controlador'/'handler' colocamos el paquete, nombre de la clase, y metodo a llamar.
+
+Ej controlador:
+com.capacitacion.lambda.demo.LambdaFunctionHandler::pruebaConexion
+
+com.capacitacion.lambda.demo == el paquete,
+LambdaFunctionHandler == nombre de la clase,
+::pruebaConexion == el metodo a llamar. //Opcional si solo se tiene un metodo.
+
+ya con esto, podemos configurar eventos de prueba, en el cual en vez de mostrar el JSON que sale por defecto
+colocamos un String ya que ese fue el tipo del primer parametro del metodo.
+y le damos probar.
+
+Este nos retornara un resultado de dicha ejecucion y si es correcta o no.
+con un log para mostrar la informacion que se envio como parametro (String) y lo que el metodo retorna.
+Con un resum de AWS mostrando el SHA-256, Duracion, Recursos configurados, ID de la solicitud,
+Duracion facturada, memoria maxima utilizada y lo mas importante o mas llamativo el Resultado de Registro;
+
+Se corresponden con una fila del grupo de registros de CloudWatch para esta función Lambda.
+
+Ej Resultado de Registro:
+
+START RequestId: 627c0d49-68a9-4fad-9bd0-365a33f0d3d2 Version: $LATEST
+Input:probando esto END RequestId: 627c0d49-68a9-4fad-9bd0-365a33f0d3d2
+REPORT RequestId: 627c0d49-68a9-4fad-9bd0-365a33f0d3d2
+Duration: 333.24 ms
+Billed Duration: 400 ms
+Memory Size: 128 MB	Max Memory Used: 81 MB	
+
+
+
+con la ayuda del plugin de AWS dentro de eclipse, al terminar la clase, se hace lo siguiente:
+
+- dar click derecho a la clase
+- ir al menu Amazon Web Services -> Upload function to AWS Lambda..
+- se puede seleccionar el handler a utilizar, servidor AWS, y si deseamos crear o seleccionar 
+una funcion
+
+- crear:
+- nombre de la lambda
+- opcional, colocar descripcion de la funcion
+- Seleccionar el rol IAM
+- seleccionar el S3 Bucket/ crear el S3 Bucket.
+- seleccionar la cantidad de memoria que va consumir la lambda y el tiempo de respuesta limite.
+- luego le damos finish y el sistema creara un jar con dicha clase y lo guardara en el S3 Bucket.
+
+(para que esto funcione correctamente, tenemos que tener bien configurado el plugin con el usuario
+UserName, ID Clave de Acceso, Clave Secreta.
+tambien debe de estar funcionando es el JDK 8, ya que aws solo soporta hasta 8).
+
+mas info del error de JDK 9 en adelante:
+https://stackoverflow.com/questions/56017933/error-in-uploading-lambdaunable-to-export-project-to-jar
+https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+
+
+
+---------------- Conceptos de AWS Lambda ----------------
+
+AWS Lambda permite ejecutar funciones en un entorno sin servidor (Serverless) para procesar eventos en
+el lenguaje que se desee.
+
+lambda amplia automaticamente el numero de instancias de su funcion para gestionar un gran numero de
+eventos.
+
+    - Funcion:
+    Script  programa que se ejecuta en AWS Lambda.
+    Lambda pasa eventos de invocacion a la funcion.
+    La funcion procesa el evento y devuelve una respuesta.
+
+    - Tiempos de ejecucion:
+    Con los tiempos de ejecucion se permite que la lambda ejecute funciones de distintos lenguajes
+    en el mismo entorno de ejecucion de base.
+    Este tiempo se puede configurar para asignarle el tiempo necesario que toma la ejecucion de la
+    funcion en algun respectivo lenguaje.
+    Este se encuentra entre el Servicio Lambda y el codigo de la funcion. y retransmite informacion
+    necesaria entre los dos.
+
+    - Capas:
+    Las capas lambda son un mecanismo de distribucion para bibliotecas(libraries), tiempos de
+    ejecucion y otras dependencias de la funcion.
+    Las capas permiten administrar el codigo de la funcion en desarrollo con independencia del
+    codigo invariable y los recursos que utiliza.
+    se puede configurar la funcion para utilizar las capas que se cree, las capas que da AWS,
+    o las capas de otros clientes de AWS.
+
+    - Origen de eventos:
+    Servicio de AWS, como Amazon SNS, o un servicio personalizado que active la funcion y ejecute
+    la logica de dicha funcion.
+
+    - Recursos posteriores:
+    Servicio de AWS, como lo son tablas de DynamoDB o buckets de Amazon S3, al que llama la funcion
+    lambda una vez activada.
+
+    - Flujos de registros:
+    Asi como AWS monitoriza automaticamente las invocaciones de la funcion y registra las metricas
+    en CloudWatch, tambien se puede comentar el codigo de la funcion con declaraciones de registro
+    personalizadas que permitan analizar el flujo de ejecucion y el desempeño de la funcion Lambda
+    para garantizar que esta funciona correctamente.
+
+    - AWS SAM:
+    Modelo para definir aplicaciones sin servidor(Serverless).
+    AWS CloudFormation admite de forma nativa AWS SAM y define una sintaxis simplificada para
+    expresar recursos sin servidor.
+
+
+
+
+
+
+
+---------------- AWS WAF ----------------
+
+WAF es un firewall de aplicaciones web que permite monitorizar las solicitudes HTTP y HTTPS que se
+reenvien a una API de Amazon API Gateway, Amazon CloudFront o a un Balanceador de carga de aplicaciones.
+
+WAF tambien permite controlar el acceso al contenido.
+
+El nivel mas sencillo, AWS WAF permite elegir uno de los siguientes comportamientos:
+
+
+-- Permitir todas las solicitudes, excepto las que especifique;
+Es util si se quiere que CloudFront o el Balanceador distribuyan contenido para un sitio web publico.
+pero ademas se desea bloquear posibles solicitudes de atacantes.
+
+
+-- Bloquear todas las solicitudes, excepto las que especifique;
+Es util si se desea distribuir contenido a un sitio web restringido cuyos usuarios se puedan
+identificar facilmente por medio de propiedades de las solicitudes web.
+
+-- Contar las solicitudes que coincidan con las propiedades que especifique;
+Si se desea permitir o bloquear solicitudes en funcion de las nuevas propiedades de las solicitudes web,
+primero se puede configurar AWS WAF para que cuente las solicitudes que coincidan con esas propiedades,
+sin permitirlas ni bloquearlas.
+
+cuando este seguro de que ha especificado las propiedades correctas, se puede cambiar el comportamiento
+para permitirlas o bloquearlas.
+
+
+
+---------------- Contenedores en Amazon ----------------
+
+ECR / ECS / EKS
+
+ECR = Registro de Contenedores Docker completamente administrado (Amazon Elastic Container Registry)
+ECS = Crear contenedores de Docker dentro de Amazon (Amazon Elastic Container Service)
+EKS = Kubernetes en Amazon (Amazon Elastic Kubernetes Service)
+
+
+------ ECR
+
+Este permite poner contenedores propios (Dockerfile) en AWS.
+
+https://docs.aws.amazon.com/es_es/AmazonECR/latest/userguide/common-errors-docker.html
+
+error 'no basic auth credentials'
+https://forums.docker.com/t/docker-push-to-ecr-failing-with-no-basic-auth-credentials/17358/24
+
+solucion "adding --no-include-email as: eval $(aws ecr get-login --no-include-email | sed 's|https://||') did it for me"
+...
+
+posible solucion al error;
+'Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?'
+
+sudo service docker stop
+sudo service docker start
+https://forums.docker.com/t/failure-to-start-docker-on-an-amazon-linux-machine/44003/17
+
+
+
+Creacion de una imagen en el ECR:
+https://platzi.com/clases/1427-aws-computo/15540-introduccion-a-ecrecseks/
+
+
+------ ECS
+
+Nos vamos para ECS dentro de la consola de AWS Amazon;
+Despues le damos a Clusters, luego creamos un cluster;
+
+seleccionamos 'Networking only' que es impulsado por Fargate (Powered by Fargate)
+le damos siguiente, luego le colocamos el nombre al cluster.
+tambien se puede 'Create VPC' para disponer de una subnet etc. pero es opcional.
+
+
+despues nos vamos para la opcion Task Definitions
+creamos una nueva tarea;
+seleccionamos el tipo FARGATE
+luego le colocamos nombre a la tarea, si existen algun rol con los permisos, seleccionamos dicho rol.
+despues agregamos un contenedor;
+colocamos el nombre del contenedor
+en la opcion de 'image' colocamos la direccion de la imagen creada con los pasos del ECR
+ejemplo;
+025486202098.dkr.ecr.us-east-1.amazonaws.com/platziweb2
+
+luego seleccionamos el limite de cantidad de memoria que se planea usar, y colocamos el puerto 80
+en la opcion de 'port mapping'
+
+las demas opciones sirven para especificar una configuracion mucho mejor y mas avanzada del contenedor.
+luego se le da añadir, y luego click en crear para terminar de crear la tarea.
+
+
+dentro del cluster, le damos a la opcion taks, y creamos una tarea de tipo Fargate y seleccionamos
+la 'Task Definition' y cluster que creamos anteriormente.
+
+despues, colocamos el Cluster VPC por defecto (primera opcion)
+subnet por defecto (primera opcion)
+
+y tener habilitado la opcion 'Auto-assign public IP'
+despues le damos click en Run Task
+y ya creara la tarea.
+
+para verificar que la tarea esta corriendo correctamente, entramos al cluster y verificamos que tenga
+una tarea corriendo, seleccionamos dicha tarea y nos mostrara mas informacion detallada de la tarea
+y en la seccion Network aparecera la IP publica que asigno para esta tarea.
+
+se copia la IP y se pega en una nueva pestaña del navegador, y debera funcionar correctamente.
+
+
+
+------ EKS
+
+La instalacion se esta haciendo en la siguiente IP:
+ssh -i C:\Users\santiago.montoya\Documents\Personal\.ssh\ec2-aws-key.pem ec2-user@54.80.191.62
+
+
+Es la implementacion de Kubernetes en Amazon
+
+Seguir los pasos de instalacion del eksctl;
+https://docs.aws.amazon.com/es_es/eks/latest/userguide/getting-started-eksctl.html
+
+luego continuar instalando el kubectl;
+https://docs.aws.amazon.com/es_es/eks/latest/userguide/install-kubectl.html
+
+
+Nuevo usuario para el nuevo EC2 (Pruebas de Kubernetes)
+
+Usuario: usuario-EC2
+ID de clave de acceso:      AKIAQL3YYSTZOSKHYH7D
+Clave de acceso secreta:    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
+
+
+
+lo primero que se debe de instalar es:
+
+pip; empaquetador de Python
+python (si no esta instalado ya)
+Despues se instala el AWS CLI (Command Line Interface)
+https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html
+
+luego se instala el eksctl;
+https://docs.aws.amazon.com/es_es/eks/latest/userguide/getting-started-eksctl.html
+
+continuar con los pasos de eksctl;
+crear cluster...
+
+crear un cluster:
+eksctl create cluster --name pruebacluster4 --version 1.12 --nodegroup-name standard-group --node-type t3.medium --nodes 3 --nodes-min 1 --nodes-max 4
+ --node-ami auto
+(posiblemente marque algun error, pero si no lo marca. luego probablemente pida configuracion de
+autenticacion de aws iam:
+https://docs.aws.amazon.com/es_es/eks/latest/userguide/install-aws-iam-authenticator.html
+)
+
+para verificar que haya funcionado todo ejecutamos el comando:
+kubectl get svc
+
+
+despues de todo esto, para instalar el panel de Kubernetes utilizamos el siguiente tutorial
+https://docs.aws.amazon.com/es_es/eks/latest/userguide/dashboard-tutorial.html
+
+token de autenticacion de la cuenta eks-admin:
+
+eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW
+50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3Rlb
+SIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJla3MtYWRtaW4t
+dG9rZW4tbWt2OG4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3V
+udC5uYW1lIjoiZWtzLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aW
+NlLWFjY291bnQudWlkIjoiYWY2NTgyNmQtOWU5NS0xMWU5LTlhYzktMTJmODdhODEyMjA4Iiwic
+3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmVrcy1hZG1pbiJ9.dAUesto
+_5MClgXiIwRBUcm8JI1xI_1vDgD5JVjTkQ973Cj-AkNncq6nzTARvKGiGEqrjacOPscOUq6j1Cl
+cOK_nVmdockfaGnyKZhbTgddTbInJXMXvIYennTd7mhs0B4yC1IK2ILpOu4Q5hyDqkZ-_Pe0J4b
+3PtqfvKjhNx_YrxiEzV4s8Ye7PT0sGB4pRDbnAqj265VhkG7gh__1DmnER0Mk5tBgOVLqxNZ2Xw
+70Qc6kPBOY_jJwxoz5lylaQD6Psl8Tj0QnSJhk1dLmEsvGcpG9MWlFj9-BPhOvw-EDga6AD59f-
+QrErhJR0_rrB2IgWYtLZz85osQ_deFboxzA
+
+
+
+para cambiar el puerto del proxy
+https://kubernetes.io/docs/tasks/access-kubernetes-api/http-proxy-access-api/#using-kubectl-to-start-a-proxy-server
+
+Comando:
+kubectl proxy --port=8080
+
+
+---------
+
+
+
+-------------- Informacion general 
+
+se configura el aws(comando: aws configure)
+(llave de acceso - clave secreta - region - formato)
+
+para verificar algun inconveniente ejecutar comando
+"eksctl utils describe-stacks --region=us-east-1 --name=pruebacluster1"
+
+para eliminar un cluster usar el siguiente comanddo
+eksctl delete cluster --region='regionName' --name='clusterName'
+
+Ejemplo
+eksctl delete cluster --region=us-east-1 --name=pruebacluster1
+
+-------------- Informacion general 
+
+
+
+
+
+---------------- API Gateway ----------------
+
+Es un servicio de AWS para la creacion, publicacion, mantenimiento y proteccion de API de REST y
+WebSocket a cualquier escala.
+
+API Gateway crea API de REST que:
+- Se basan en HTTP
+- Cumplen el protocolo de REST, lo que permite la comunicacion cliente-servidor.
+- Implementan metodos de HTTP estandar como, por ejemplo, GET, POST, PUT, PATCH y DELETE.
+
+
+API Gateway crea API de WebSocket que:
+- Cumplen el protocolo de WebSocket, que permite la comunicacion cliente-servidor de duplex completo con estado.
+- Dirigen mensajes entrantes y en funcion del contenido de los mensajes.
+
+Arquitectura de API Gateway
+https://docs.aws.amazon.com/es_es/apigateway/latest/developerguide/images/Product-Page-Diagram_Amazon-API-Gateway-How-Works.png
+
+
+
+"Es un endpoint publico que recibe peticiones de tipo HTTP"
+si tiene la informacion en cache esta sera devuelta y si no, esta puede entregar la informacion de:
+- Una funciona lambda.
+- servidor web en EC2.
+- Elastic BeanStalk
+
+o algun tipo de informacion que se este recibiendo por medio de ese endpoint.
+
+
+
+---------------- Elastic BeanStalk ----------------
+
+Plataforma de Amazon, que permite administrar diversos escenarios.
+donde en pocos casos, obtienes un Balanceador de cargas y tantas instancias EC2 como uno indique.
+
+Este ambiente puede escalar de manera Dinamica de acuerdo a:
+Tiempo de respuesta a los usuarios, uso de CPU, uso de RAM, etc.
+
+Ambientes soportados:
+Docker image, Go, Java SE, Java con Tomcat, .NET + Win Server + IIS, NodeJS, PHP, Python, Ruby.
+
+
+
+------------------ Amazon Web Services (AWS)  - FIN ------------------

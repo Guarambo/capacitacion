@@ -1,0 +1,439 @@
+
+Informacion del Libro: " DevOps para DUMMIES "
+
+Modelos de Servicio en la nube:
+
+-   IaaS    =   Infraestructura como Servicio
+-   PaaS    =   Plataforma como Servicio
+-   SaaS    =   Software como Servicio
+
+
+----    IaaS    ----
+
+Un proveedor proporciona a los clientes acceso directo a almacenamiento, red, servidores y otros
+recursos de computacion en la nube.
+
+
+
+----    PaaS    ----
+
+Un proveedor de servicios ofrece acceso a un entorno basado en la nube, donde los usuarios pueden
+desarrollar y ofrecer aplicaciones.
+El proveedor suministra la infraestructura subyacente
+
+
+
+----    SaaS    ----
+
+Los usuarios se suscriben al Software y acceden al mismo por medio de la web o de las API del
+proveedor. Los usuarios se suscriben al Software y acceden al mismo por medio de la web o de las
+API del proveedor.
+
+
+------------------------------------
+
+ALM = Application Lifecycle Management (Ciclo de vida de una aplicacion)
+
+ITIL = Information Technology Infraestructure Library
+(Biblioteca de infraestructura de tecnologias de la informacion)
+
+
+
+
+
+------------------      ¿ Que es DevOps ?       ------------------
+
+Para entender esto, las empresas deben de captar que las necesidades empresariales
+bien sea para la creacion de software interno o software para el cliente deben tener
+un enfoque agil, ya que casi siempre los proyectos tienen complicaciones por problemas
+de desarrollo y distribucion del software.
+
+para amplificar el significado del parrafo anterior, este problema se puede dividir en dos:
+
+1- Sistemas de registro
+    Las aplicaciones tradicionales, que almacenan y manejan grandes cantidades de informacion,
+    y que estan diseñadas con un alto nivel de fiabilidad y estabilidad, son aplicaciones que no
+    requieren de estar constantemente revisandolas para hacer alguna mejoria, si no que se hace
+    una o dos revisiones grandes al año.
+
+
+2- Sistemas de participacion
+    gracias a las comunicaciones y la madurez de las aplicaciones web, los sistemas de registro 
+    se ven reemplazados por sistemas de participacion, ya que los clientes pueden acceder a estos
+    directamente y utilizarlos para interactuar con el sistema.
+    Estas aplicaciones deben de ser faciles de utilizar, con un elevado rendimiento y capaces
+    de cambiar rapidamente para satisfacer las necesidades de los clientes y las fuerzas del
+    mercado que esta en constante evolucion.
+
+
+
+DevOps aplica los principios "lean" y "agile" a toda la cadena de suministro de software
+
+Los 12 principios del manifiesto ágil
+
+establece estos 12 principios:
+
+    - Nuestra principal prioridad es satisfacer al cliente a través de la entrega temprana y continua de software de valor.
+    - Son bienvenidos los requisitos cambiantes, incluso si llegan tarde al desarrollo. Los procesos ágiles
+    se doblegan al cambio como ventaja competitiva para el cliente.
+    - Entregar con frecuencia software que funcione, en periodos de un par de semanas hastaun par de meses,
+    con preferencia en los periodos breves.
+    - Las personas del negocio y los desarrolladores deben trabajar juntos de forma cotidiana a través del proyecto.
+    - Construcción de proyectos en torno a individuos motivados, dándoles la oportunidad y el respaldo que
+    necesitan y procurándoles confianza para que realicen la tarea.
+    - La forma más eficiente y efectiva de comunicar información de ida y vuelta dentro de un equipo de desarrollo
+    es mediante la conversación cara a cara.
+    - El software que funciona es la principal medida del progreso.
+    - Los procesos ágiles promueven el desarrollo sostenido. Los patrocinadores, desarrolladores y usuarios deben
+    mantener un ritmo constante de forma indefinida.
+    - La atención continua a la excelencia técnica enaltece la agilidad.
+    - La simplicidad como arte de maximizar la cantidad de trabajo que se hace, es esencial.
+    - Las mejores arquitecturas, requisitos y diseños emergen de equipos que se autoorganizan.
+    - En intervalos regulares, el equipo reflexiona sobre la forma de ser más efectivo y ajusta su conducta en consecuencia.
+
+
+Metodologia Lean:       -        https://www.scrummanager.net/bok/index.php?title=El_manifiesto_%C3%A1gil
+
+La metodologia Lean tiene que garantizar que usando los minimos recursos, la produccion se ajuste para que el cliente
+reciba el maximo valor.
+Es clave la reduccion de desperdicios y este es el pilar fundamental en que se basa este tipo de gestion.
+Los costes hay que calcularlos cuando se inicia el desarrollo del diseño del producto, desde el principio.
+
+para encontrar el equilibrio entre materiales o procesos eficientes y baratos en contraposicion a otros seguros y ya
+usados en el pasado, hay que resaltar la eliminacion de residuos en:
+
+    - Inventario
+    - Sobreproduccion
+    - Transporte
+    - Procesos superfluos que no aportan
+
+principios basicos de Lean:      -       https://blog.bextok.com/metodologia-lean-historia-principios-basicos/
+
+    - Desperdicios minimos (MUDA);
+    Eliminar las cosas que no aportan valor, considerando "valor" como algo por lo que el cliente este dispuesto a pagar.
+    - Mejora continua;
+    Estar constantemente en mejora de los puntos del proyecto.
+    - Flujo continuo en todos los pasos del proceso;
+    Identificar el mapa de cadena de valor del proyecto, para detectar que procesos no aportan al proyecto.
+    - Procesos basados en PULL;
+    haciendo limpieza, mirando que es innecesario y eliminarlo para asi no generar desperdicios, lo que generaria
+    menos esfuerzos del equipo, creando una solucion simple, compacta, y ajustada al cliente.
+
+
+DevOps es esencial ya que mejora la manera en que una empresa aumenta el valor para clientes, proveedores y asociados
+Este proporciona un importante rendimiento de la inversion en tres areas:
+
+    - Mejora de la experiencia del cliente
+    - Mayor capacidad de la innovacion
+    - Reduccion del tiempo para conseguir valor
+
+
+la mejora de la experiencia del cliente se hace por medio de las reuniones constantes, los feedbacks generados por
+los clientes, usuarios, lineas de negocio, proveedores, etc. y las empresas deben responder estos feedbacks
+ya que representa una mejora potencial al negocio.
+
+para lograr mayor capacidad de la innovacion, se hace por medio de una metodologia llamada 'lean' que ayuda
+a controlar los recursos y ver hacia donde van, para asi ver que procesos o trabajos estan duplicados
+o no estan enfocados en los objetivos y reducirles a estos los recursos o inclusive eliminarlos para
+implementar dichos recursos en otras partes del negocio potencialmente necesarias.
+
+principios comunes para DevOps:
+
+    - Desarrollar y comprobar contra sistemas similares a los de produccion.
+    - Implementar mediante procesos fiables y repetibles.
+    - Monitorizar y validar la calidad operativa.
+    - Amplificar los bucles de feedback.
+
+
+
+DevOps esta constituido por un amplio conjunto de capacidades que abarcan todo el cilo de entrega de software.
+lo que significa que cuando una empresa quiere comenzar con DevOps, esta implementacion
+dependera de los objetivos y metas del negocio; que problemas trata de abordar y que lagunas
+necesita llenar en sus capacidades de entrega de software.
+
+
+
+Rutas para la adopcion de DevOps:
+
+Imagen de Arquitectura de Referencia de DevOps
+https://drive.google.com/open?id=1kRT2wwH0so8r0y6NLo3wLJB1I2cjI_t5
+
+En la imagen anterior se proponen 4 conjuntos de adopcion;
+
+    - Planificar
+    - Desarrollar/Comprobar
+    - Implementar
+    - Operar
+
+
+Planificar;
+esta ruta de adopcion se compone de una practica centrada en estalecer metas empresariales
+y ajustarlas segun el feedback de los clientes. tambien llamado Planificacion Empresarial continua.
+
+
+Operar:
+Feedback del cliente y Optimizacion continua
+
+gracias a las consntantes reuniones, feedbacks del cliente y mejoras hechas, se pueden ajustar los
+planes de negocio, se puede ajustar las capacidades de desarrollo, operaciones puede mejorar el
+entorno en el que se implementa la aplicacion.
+esto es un bucle de feedback continuo que es un componente esencial de DevOps y permite a las empresas
+ser mas agiles y dar mejor respuesta a las necesidades del cliente.
+
+
+Cultura DevOps
+Se caracteriza por un elevado nivel de colaboracion entre los roles, dar prioridad a los objetivos
+empresariales en lugar de los departamentales, confianza y conceder elevado valor a aprender a
+traves de la experimentacion.
+
+Practicas de transformacion Agile y Lean que hacen parte del nucleo de DevOps;
+"Scaled Agile Framework" (SAFe)
+"Disciplined Agile Delivery" (DAD)
+scrum
+
+
+Para medir esta Cultura dentro de un proyecto o un equipo de trabajo, no se requieren de hacer
+encuestas ni desarrollar evaluaciones en cuanto al estado de la moral del equipo o al estado
+de colaboracion dentro del equipo;
+esto se puede medir mediante solo la observacion, mirar cada cuanto tiempo un desarrollador
+recurre a algun miembro del equipo de operaciones o QA para ayudar a la resolucion de algun problema.
+
+si esto se nota bastante dentro del equipo, quiere decir que tienen muy buena comunicacion y colaboracion
+entre las partes del proyecto. por ende, ellos manejan un buen % porcentaje de cultura DevOps.
+
+
+
+La gestion del cambio debera incluir procesos que posibiliten las siguientes capacidades:
+
+- Gestion de los elementos del trabajo
+- Flujos de trabajo configurables e los elementos de trabajo
+- Gestion de la configuracion de proyectos
+- Planificacion (Agil e iterativa)
+- Control de acceso a los materiales basados en roles
+
+
+
+
+------------
+Tecnicas de DevOps
+
+Algunas tecnicas especificas que debera incluir al adoptar DevOps:
+
+    - Mejora continua
+    - Planificacion de versiones
+    - Integracion continua
+    - Entrega continua
+    - Comprobacion continua
+    - Monitorizacion y feedbacks continuos
+
+
+
+Infraestructura como codigo
+
+Hay tres tipos de herramientas de automatizacion disponibles para gestionar la infraestructura como codigo;
+
+    - Herramientas centradas en las aplicaciones o el middleware
+    - Herramientas de entorno e implmantacion
+    - Herramientas genericas
+
+
+Estados de un proceso tipo de entrega de DevOps:
+https://drive.google.com/open?id=1yPjSaE-iPEoToci5k3g_1UGJU3_mrkqI
+
+
+- Estado de compilacion
+Se genera el codigo para crear y comprobar unitariamente los archivos binarios que se va a implantar.
+las organizaciones de desarrollo suelen utilizar servidores de compilacion para facilitar el gran
+numero de compilaciones que se precisa de forma continuada para hacer posible la integracion continua.
+
+- Repositorio de paquetes
+Mecanismo comun de almacenamiento para los archivos binarios creados durante el estado de compilacion.
+Estos mecanismos tambien pueden almacenar archivos de configuracion, de infraestructura como codigo y
+script de implantacion.
+
+- Entorno de prueba
+Este es el lugar en el que los equipos de QA, aceptacion por el usuario y desarrollo/comprobacion
+realizan verificaciones.
+Dependiendo de las necesidades del equipo de QA, se utilizan unas herramientas especificas tales como:
+
+    - Administracion del entorno de prueba
+    Estas facilitan la provision y configuracion de los entornos de prueba.
+
+
+    - Administracion de los datos de prueba
+    Esta es una funcion esencial para cualquier organizacion que desee habilitar la comprobacion
+    continua.
+    El numero de pruebas que se pueden hacer depende de la cantidad de informacion/datos esten
+    disponibles, y tambien depende de la velocidad con la que estos datos se actualizan.
+
+
+    - Pruebas de integracion, funcion, rendimiento y seguridad
+    Existen herramientas automatizadas para cada una de estas pruebas, lo que se tiene como
+    practica necesaria, es que todos los scripts, archivos de prueba, resultados esten en un mismo
+    repositorio donde se pueda establecerse la trazabilidad hasta el codigo, requisitos y defectos.
+
+    - Virtualizacion del servicio
+    Como las aplicaciones modernas dependen de varias otras apicaciones mas, microservicios,
+    servidores de aplicaciones, bases de datos, etc. no se puede crear un ambiente de prueba
+    para pruebas ya que puede que algun servicio no este disponible, o sea muy caro ejecutarlo para
+    hacer pruebas. por eso existe la Virtualizacion del servicio, ya que este nos permite
+    simular el comportamiento, funcionalidad y rendimiento de determinados componentos de nuestra
+    aplicacion para posibilitar de extremo a extremo del conjunto de la aplicacion.
+
+    Estas herramientas crean componentes virtuales llamados 'Stubs' de las aplicaciones y servicios
+    necesarios para ejecutar las pruebas.
+
+    Ej: IBM Rational Test Virtualization Server ofrece capacidades de virtualizacion.
+
+
+    ---------
+
+    Las aplicaciones se implantan en entornos de preparacion y de produccion.
+    Hoy en dia gracias a la virtualizacion y la nube, los entornos de preparacion  y produccion
+    pueden incluir cientos o miles de servidores.
+    las herramientas de monitorizacion permiten a las organizaciones monitorizar las aplicaciones
+    implantadas en produccion.
+
+
+
+    --- Automatizacion de la implantacion y administracion de versiones
+
+    Gestionar la automatizacion de la implantacion de aplicaciones de un estado al siguiente precisa
+    herramientas especializadas;
+
+    - Automatizacion de la implantacion
+    Las herramientas de automatizacion de la implantacion son las herramientas cnetrales del espacio
+    DevOps, con esto se hacen implantaciones orquestadas y se hace seguimiento a la version
+    implantada en cada nodo en cualquier estado del proceso de compilacion y entrega.
+    Tambien permite gestionar la configuracion de los entornos en cada fase en las que se haria
+    dicha implantacion.
+
+    con las herramientas de automatizacion se logra una mejor colaboracion, trazabilidad y calidad
+    de la implantacion.
+
+    - Gestion de versiones
+    Orquestar los planes de versiones y las implantaciones asociadas con cada version precisa
+    coordinacion entre los equipos de negocio, desarrollo, QA y operaciones.
+    con estas herramientas, se permite planificar y ejecutar versiones.
+    tienen un portal unico para la colaboracion entre los participantes de la version
+    y ofrecen trazabilidad para la versiones y sus componentes en todos los estados del proceso
+    de compilacion y entrega.
+
+
+
+Sistemas Cloud
+
+La velocidad en la provision del entorno en plataformas cloud puede proporcionar un sistema de
+autoservicio con disponibilidad y acceso al entorno bajo demanda para los profesionales DevOps.
+
+La posibilidad de provisionar y desprovisionar dinamicamente estos entornos segun convenga permite
+mejorar la gestion del entorno y reducir los costes al minimizar la necesidad de entornos
+estaticos permanentes.
+
+por medio de las tecnologias "pattern" se ayuda a las organizaciones a definiir y crear versiones
+de los entornos como software posibilita la disponibilidad de entornos de privisionamiento que
+satisfagan las necesidades profesionales.
+
+Desde Automatizacion, disponibilidad de tecnologias de implementacion de aplicaciones.
+Ej: IBM UrbanCode Deploy que con esta herramienta se puede tener todo el entorno cloud e implementar
+las versiones adecuadas de las aplicaciones a medida que se precise.
+
+Disponibilidad de virtualizacion del servicio.
+funcionando con entornos cloud, hace posible la simulacion de servicios necesarios para las pruebas
+sin necesidad de provisionar instancias reales de los servicios.
+
+
+"Cloud sin DevOps significa no aprovechar todas las ventajas de cloud"
+"Adoptar DevOps con entornos alojados en la nube ofrece las capacidades necesarias para ofrecer
+todos los beneficios de cloud a las organizaciones que ofrecen aplicaciones de software.
+
+
+------- Full Stack
+
+Por medio del uso de varias herramientas tales como IBM Virtual System Patterns, plantillas de
+OpenStack HOT, para definir el entorno cloud como una plantilla.
+tambien las herramientas de automatizacion de la implementacion como IBM UrbanCode Deploy with Patterns
+puede ofrecer provisionamiento 'full-stack'.
+
+con esto se puede ejecutar una aplicacion en la nube con un entorno ya preparado para esto.
+y los cambios posteriores que se le hagan a la aplicacion, la configuracion o el contenido se pueden
+implementar de una forma continua al entorno cloud como actualizaciones.
+
+
+
+
+------- Modelos de Servicio Cloud
+
+hay dos tipos de modelos de Servicio primarios para cloud:
+
+- Infraestructura como servicio (IaaS)
+- Plataforma como servicio (PaaS)
+
+Diferencias entre ambos modelos
+https://drive.google.com/open?id=1yPjSaE-iPEoToci5k3g_1UGJU3_mrkqI
+
+
+
+------- Clouds hibridos
+
+Hay varios tipos de escenarios de cloud:
+
+    - Cloud e infraestructura fisica
+    Es un escenario extremadamente habitual Salvo en el caso de organizaciones nacidas en
+    el mundo cloud, es en realidad el escenario por defecto.
+    Cualquier organizacion dada tiene cargas de trabajo y aplicaciones que actualmente
+    se ejecutan en su infraestructura fisica existente.
+    muchas veces son aplicaciones de sistema de registro con uso intensivo de datos, que no planean
+    migrarse a cloud por limitaciones tecnologicas o por costes.
+    cuando se planea migrar las cargas de trabajo, estas no se pueden hacer de un dia para otro,
+    si no que se requiere de un tiempo bastante prolongado, en el que Cloud y la infraestructura
+    fisica van a coexistir para el funcionamiento correcto de las aplicaciones.
+
+
+    - Cloud on-premise y off-premise
+    En este escenario, una organizacion puede adoptar un cloud 'off-premise' (publico o virtual-privado)
+    para algunas aplicaciones y cargas de trabajo.
+    un cloud 'on-premise' (privato) para otras aplicaciones.
+
+
+    - IaaS y PaaS
+    Incluye clientes que han adoptado un modelo de servicio cloud PaaS para algunas cargas de trabajo
+    e IaaS para cargas de trabajo de sistema de registro mas tradicionales.
+
+
+
+Escalados agiles;
+
+- Scaled Agile Framework (SAFe)
+- Disciplined Agile Delivery (DAD)
+
+
+Aplicaciones en multiples niveles
+
+Estos sistemas suelen integrar aplicaciones web, de escritorio y movil en sistemas mas
+front-end y back-end, como aplicaciones en paquete, sistemas de alamcen de datos,
+aplicaciones ejecutadas en mainframes y sistemas de gama media.
+
+Un enfoque bueno es seguir procesos automatizados y uniformes de compilacion, configuracion e
+implementacion en todos los estados del desarrollo.
+Con esto se garantiza que se construye todas las piezas que se necesitan y solo aquellas que se
+necesitan.
+Esto tambien permite que la aplicacion se mantenga integra a medida que sucedan cambios y que
+el proceso avance en los ciclos de pruebas, QA y produccion.
+
+
+DevOps en la empresa
+
+Dada la naturaleza autenticamente multiplataforma de las actuales empresas, con presencia de app
+moviles, cloud, distribuidas y de mainframe, todas las cuales tiene que crearse, integrarse,
+implementarse y operarse, la necesidad de las eficiencias, optimizacion y colaboracion que ofrece
+DevOps esta convirtiendose en un elemento diferenciador competitivo clave.
+
+
+
+
+
+numero 54 arriba a la izquierda
+Construir un proceso de entrega
+
+Pagina 60 - 77

@@ -1,0 +1,125 @@
+-------------- Curso de Desarrollo Web Online --------------
+
+Terminos - Diccionario
+HTML = Hypertext Markup Language ('Lenguaje de marcado para hacer websites')
+CSS = Cascade Style Sheet ('Lenguaje para definir la presentacion de documentos HTML')
+
+JavaScript = lenguaje de programacion del navegador (Funciona dentro de los navegadores)
+
+DOM = Document Object Model
+(Modelo de documento que se carga en el navegador web y que presenta el documento como un arbol de nodos)
+
+---- Plan de estudio del Curso Desarrollo Web - INICIO ----
+
+Otra opcion: https://platzi.com/blog/guia-definitiva-desarrollo-2019/
+
+Cursos:
+
+- Desarrollo Web
+- Git - Github
+- Responsive Design
+- CSS Grid Layout
+- Animaciones
+- PostCSS
+
+- De jQuery a JavaScript
+- Fundamentos de JavaScript
+- Webpack
+- React JS ó Angular JS
+- Redux
+- React Router
+
+---- Plan de estudio del Curso Desarrollo Web - FIN ----
+
+
+---- Etiquetas - INICIO ----
+
+una etiqueta es usada para crear contenido.
+
+Wikipedia de HTML
+Informacion de las etiquetas HTML -> https://html5doctor.com
+
+en el link anterior, se puede ver una explicacion de lo que es/que hace la etiqueta con ejemplo.
+
+<ol> = listas ordenadas
+<ul> = listas desordenadas
+<p> = parrafo
+<small> = subEtiqueta de parrafo (para hacer mas pequeño el texto)
+<header> = encabezado
+<section> = seccion de la pagina
+<footer> = pie de pagina
+<h1> = titulo mas grande ... hay hasta <h6>
+<strong> = negrilla
+<br> = salto de linea
+
+
+---- Etiquetas - FIN ----
+
+
+
+---- Shortcut utiles - INICIO ----
+
+https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
+
+Create New Terminal = Ctrl + Shift + ñ
+Language Mode = Ctrl + K M
+Comentar linea de codigo = Ctrl + K + C
+Copiar linea en la que estas hacia abajo = Alt + Shift + FlechaAbajo
+
+
+---- Shortcut utiles - FIN ----
+
+
+
+---- Informacion/Descripcion dentro de los videos - INICIO ----
+
+
+h1 a h6: son etiquetas para indicar títulos con un estilo que destaca del resto.
+article: es la parte de nuestro contenido que puede vivir por sí mismo. Pueden haber tantos
+artícle como proyectos o eventos tenga nuestro portafolio.
+p: define el texto de un párrafo.
+small: aplica una apariencia de texto reducido en tamaño.
+strong: aplica al texto un formato de negritas.
+a: corresponde a un ancla o enlace a una url interna o externa del documento.
+img: con esta etiqueta podemos enlazar imágenes en el documento.
+figure: le da un contexto semántico a las imágenes.
+
+Para img:
+
+    src: específica la ruta de la imagen que será mostrada a través de esta etiqueta.
+    La ruta puede ser absoluta (cunado especifica una dirección exacta, incluyendo el prefijo http(s))
+    o relativa (cuando la referencia a la ubicación de la imagen parte de la ubicación del archivo actual).
+    alt: indica un texto alternativo que será mostrado en lugar de la imagen cuando ésta no pueda ser mostrada.
+    width: ancho de la imagen en pixeles.
+    height: alto de la imagen en pixeles.
+
+Para link, en la cabecera head del documento:
+
+    rel: indica la relación del recurso con el contenido.
+    type: indica el tipo de recurso / formato.
+    href: indica la ubicación (url) del recurso enlazado.
+
+Para meta, ambién en la cabecera head del documento:
+
+    charset: indica la tabla de caracteres (utf-8 para caracteres latinos) usada en el documento.
+
+Para a:
+
+    href: la ubicación o ruta a la que enlaza esta etiqueta de ancla. En el caso de querer enlazar
+    a elementos que se encuentran dentro del mismo documento, este atributo debe indicar el valor
+    del atributo ““id”” de ese elemento destino del enlace.
+
+dentro del archivo .css
+si requerimos que algun atributo sera el importante de la pagina escribimos '!important' en el atributo
+Ej:
+
+header {
+    background: #3C96A7 !important;
+}
+
+
+
+---- Informacion/Descripcion dentro de los videos - FIN ----
+
+
+file:///C:/Users/santiago.montoya/Documents/Personal/Cursos%20Platzi/Curso%20Desarrollo%20Web/index.html

@@ -1,0 +1,315 @@
+Informacion Spring Boot
+
+The Trinity (La Trinidad)
+
+java.lang.Object:
+Dependency Injection                -- Inyeccion de Dependencias
+Aspect-Oriented Programming         -- Programacion Orientada a Aspectos
+Enterprise Service Abstractions     -- Servicios Empresariales (Integraciones con BD, servicios Rest, APIs, etc)
+
+---------------------- VARIABLES DE ENTORNO; obligatorias - INICIO ----------------------
+
+---- Java - Inicio ----
+JAVA_HOME
+
+root directory
+c:\java\jdk1.8_90 ...
+
+path
+%JAVA_HOME%\bin;
+
+comando para version
+java -version
+---- Java - Fin ----
+
+---- Maven - Inicio ----
+M2_HOME
+
+root directory
+c:\apache-maven-3.4 ...
+
+path
+%M2_HOME%\bin;
+
+comando para version
+mvn -version
+---- Maven - Fin ----
+
+---- Gradle - Inicio ----
+GRADLE_HOME
+
+root directory
+C:\Gradle\gradle-5.4.1 ...
+
+path
+%GRADLE_HOME%\bine;
+
+comando para version
+gradle -v
+---- Gradle - Fin ----
+
+
+---------------------- VARIABLES DE ENTORNO; obligatorias - FIN ----------------------
+
+
+
+
+---- MAVEN PROJECT ----
+Esta basado en un archivo pom.xml
+que es donde se colocan las dependencias del proyecto,
+todas las dependencias se guardan en la carpeta .m2 del pc
+
+---- GRADLE PROJECT ----
+Esta basado en un archivo build.gradle
+que es donde se colocan las dependencias del proyecto,
+todas las dependencias las guarda en la carpeta .gradle del pc
+
+
+
+
+---- ShortCuts ----
+Ctrl + Shift + O    = Agregar todos los Imports
+Ctrl + Shift + F    = Organizar codigo
+Ctrl + Spacebar     = Mostrar informacion de variable etc.
+
+
+
+---- Informacion Etiquetas ----
+
+@Modifying                          -- Etiqueta que se utiliza para indicar que esta consulta es un Update.
+@Query("consulta")                  -- Etiqueta que se utiliza cuando se quiere crear su propio Query.
+User findByUserName(String name);
+
+parametro 'consulta' es una consulta de base de datos desarrollada por uno.
+
+
+
+
+---- Informacion General - INICIO ----
+
+
+-----
+En STS para limpiar el proyecto es con Run As -> Maven Clean
+para actualizar dependencias es con Maven -> Update Project...
+-----
+
+
+
+-- Link https://stackoverflow.com/questions/42977137/creating-an-object-from-optionalobject --
+Problema en una consulta que es de tipo Optional del CrudRepository; 
+Optional<T> findById(ID id);
+cuando se hace llamado de este metodo, se necesita retornar el Objeto que le llevamos como parametro T,
+por ende utilizamos '.orElse(null)', con el cual nos retorna el objeto que necesitamos en vez del "Optional";
+Ejemplo;
+
+User user = userService.findById(id).orElse(null);
+// Retorna correctamente el User, y si no retorna un null; pero este puede ser cambiado por cualquier otro codigo.
+
+
+---------------- application.properties
+Un proyecto tiene un archivo que es en el cual se guardar las propiedades del mismo;
+este es llamado 'application.properties', que es el archivo/nombre por defecto de un proyecto
+en springBoot.
+pero tambien existe la posibilidad de usar otro, llamado 'application.yml' ó 'application.yaml', que nos permite
+tener una estructura un poco mas organizada de nuestras propiedades (identacion).
+----------------
+
+---------------- seguridad; Encriptar password
+Spring tiene una libreria, que se llama BCrypt, este nos ayuda a manejar la seguridad
+permitiendo encriptar contraseñas por ejemplo.
+
+Ej:
+https://www.dailycred.com/article/bcrypt-calculator
+https://www.browserling.com/tools/bcrypt
+
+Lo que hace el algoritmo es que al generar dicha encriptacion, que siempre es distinta asi sea la misma contraseña
+es evaluar, si lo generado(password hash) es igual a la contraseña.
+
+Nota:
+Spring Security tiene incluido esta libreria.
+----------------
+
+
+-----
+dentro de la carpeta src del proyecto se debe crear lo siguiente;
+
+webapp
+    WEB-INF
+        jsp                 (opcional, ya que hoy en dia no se trabaja con jsp)
+
+
+
+
+--- Informacion Adicional
+por medio de la dependencia de maven-plugin se puede ejecutar
+desde consola una aplicacion, estando en la raiz del proyecto
+por medio del siguiento comando
+mvn spring-boot:run
+
+---- Informacion General - FIN ----
+
+
+
+---- application.properties - INICIO ----
+
+-- server.port=8080
+Recibe como parametro un int; aqui podemos asignar un puerto especifico para la app.
+
+-- spring.jpa.database-platform=org.hibernate.dialect.MySQL5Dialect
+Es importante y necesario, para que se sepa que dialecto va a menajear el proyecto.
+
+-- spring.jpa.show-sql=true
+Sirve para mostrar las sentencias SQL.
+Nota importante:
+colocar en falso cuando se pase a Produccion.
+
+-- spring.mvc.view.prefix: /WEB-INF/jsp/
+   spring.mvc.view.suffix: .jsp
+se denomina para ver en que tipo de vista se utilizaria esta aplicacion
+hoy en dia se utiliza thymeleaf
+este es el directorio de las vistas, aqui es a donde se debe enviar siempre
+
+Ej:
+IndexController.java
+
+@Controller
+public class IndexController {
+
+	@RequestMapping("/")
+	public String getIndexPage(){
+		return "UserManagement";
+	}
+}
+
+Retorna 'UserManagement' que seria el nombre de la vista a la cual se va a redireccionar.
+que deberia de estar en la carpeta WEB-INF/jsp/
+
+
+
+
+-- spring.jpa.hibernate.ddl-auto=update
+con esta linea de codigo, spring hace algunas acciones;
+create-drop:
+    con esta accion crea y elimina tablas (no es recomendado).
+
+validate:
+    valida si la tabla corresponde a la entidad.
+    (con sus atributos/columnas; si existe algun cambio devuelve una excepcion)
+
+update:
+    valida si la tabla existe o no; si no existe la crea
+    y solamente se ha cambiado la tabla o algun atributo, esta se modifica.
+    (no es recomendable en produccion, por que siempre estaria validando).
+
+none:
+    solo se coloca en produccion, por que en teoria ya no deberias de estar
+    cambiando la base de datos.
+    (Recomendacion, manejar por Scripts alguna actualizacion de BD en produccion).
+
+
+
+---- application.properties - FIN ----
+
+
+---- Informacion Angular - INICIO ----
+
+--Etiqueta body <body> </body>
+lleva un atributo para indicar que es una aplicacion Angular;
+    <body ng-app="myApp" class="ng-cloak"> </body>
+
+--El controller es un .js (JavaScript) en el cual tendremos los metodos a utilizar
+
+--Etiqueta div principal despues del body <div> </div>
+En esta indicamos que controller es el que se va a utilizar aqui;
+     <div class="generic-container" ng-controller="UserController as ctrl">
+     donde ng-controller"" es el nombre del controller a utilizar y el 'as' es para tener
+     un nombre corto de dicho controller.
+
+--Etiqueta form <form> </form>
+lleva un atributo ng-submit que indica que metodo del JS va a utilizar;
+    ng-submit="ctrl.submit()"
+
+--Etiqueta input <input/>
+lleva un atributo ng-model que indica que modelo se planea utilizar;
+este input debe tener el atributo type=hidden.
+    ng-model="ctrl.user.id
+
+otro input
+lleva un atributo ng-model que indica a que campo hace referencia;
+   <input type="text" ng-model="ctrl.user.username" name="uname"/>
+
+si es campo requerido lleva el atributo 'required'
+si tiene un tamaño minimo lleva el atributo ng-minlength="3"
+
+--Etiqueta span <span> </span>
+lleva un atributo ng-show que indica que planea mostrar del controller;
+    <span ng-show="myForm.uname.$error.required>Campo requerido</span>
+    <span ng-show="myForm.uname.$error.minlength>Minimo 3 caracteres</span>
+    <span ng-show="myForm.uname.$invalid>Campo invalido</span>
+
+
+--Etiqueta input de tipo Submit
+en esta etiqueta se agrega el value que se planea hacer, que en este caso seria
+agregar o actualizar un usuario validando por medio de su id.
+Ej:
+    <input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+donde se valida si el id es nuevo hace un 'Add' (agrega) y si no hace un 'Upadte' (actualiza) de la informacion.
+
+
+--Etiqueta tr <tr> </tr>
+lleva un atributo llamado ng-repeat para mostrar mas de un solo registro de una lista.
+Ej:
+    <tr ng-repeat="u in ctrl.users">
+hace un for para recorrer los usuarios que hay.
+---- Informacion Angular - FIN ----
+
+
+
+
+---- Informacion MongoDB - INICIO ----
+en el repositorio, debe de extender de PagiingAndSortingRepository.
+
+
+spring.data.mongodb.uri=
+es la propiedad que hace referencia a la BD;
+spring.data.mongodb.uri=mongodb://localhost:27017/databasename
+
+
+en la parte de los modelos donde con JPA
+se utiliza la etiqueta @Entity se utiliza @Document
+
+todo lo que era de tipo List ... se convierte a Iterable
+
+---- Informacion MongoDB - FIN ----
+
+---- Informacion logback - INICIO ----
+
+https://www.adictosaltrabajo.com/2016/03/28/tutorial-logback-en-spring-boot/
+
+logback en Spring Boot busca configuracion en los ficheros;
+
+logback.xml ó logback-spring.xml
+
+en las raices del classpath de la aplicacion,
+la manera mas sencilla de personalizar Logback es definir un fichero;
+logback-spring.xml
+en el directorio src/main/resources de cualquiera de los proyectos
+que componen la aplicacion Spring boot.
+
+para facilitar la personalizacion, SpringBoot lo proporciona bajo la ruta 
+org/springframework/boot/logging/logback/
+
+
+----- application.yml ----
+
+este es una version basica del archivo application.yml
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/?serverTimezone=UTC
+    username: root
+    password: kappa123
+
+
+---- Informacion logback - FIN ----

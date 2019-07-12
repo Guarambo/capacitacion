@@ -1,0 +1,125 @@
+Documentacion de Seguridad en proyectos de Pragma
+
+https://docs.google.com/document/d/1yrDSBGLYt3lwd1dkYUIUAIJunIJ8MZzb2BK1jnxeUWc/edit
+
+
+
+---------------------- BACK-END - FIN ----------------------
+
+Generalidades
+
+-- Eliminar información de la aplicación en los logs.
+Esto significa que no se debe imprimir mensajes en el logs
+del servidor con información sensible, se recomienda el uso de
+un componente de auditoría, y ocultar la información sensible
+o cifrar en caso de considerar que sea necesario.
+
+-- Siempre manejar time se recomienda tener un timeout general y
+uno por caout en el consumo de servicios web,da servicio en particular.
+
+-- El consumo de cualquier recurso que provea el Backend debe estar bajo https.
+
+-- Configurar certificados de seguridad. Toda la navegación del portal debe ser bajo https.
+
+-- En lo posible, siempre cifrar la comunicación entre componentes.
+
+-- El consumo de servicios se debe realizar por medio de tokens de seguridad.
+Se debe establecer un tiempo de vigencia de este token, en pragma se tiene un
+framework de seguridad que suple esta necesidad, este está desarrollado
+sobre la base de Apache Shiro (https://shiro.apache.org/).
+
+-- Se debe tener auditoría de la actividad del usuario,
+teniendo un identificador único entre todas las capas de comunicación
+que permita tener trazabilidad de las operaciones del usuario.
+
+-- A nivel de lógica de negocio se deben realizar las validaciones necesarias
+que eviten la suplantación y fraudes en operaciones sensibles del usuario.
+
+-- Contar con medidas que garanticen la atomicidad de las operaciones y
+eviten su duplicidad debido a fallas en la comunicación o problemas de aplicaciones.
+
+-- Los datos sensibles que se almacenen en base de datos deben estar cifrados.
+
+-- Contar con políticas de claves que garanticen la seguridad en las credenciales de ingreso a los usuarios.
+
+-- Los datasources de acceso a base de datos, deben estar a nivel de
+application server (WAS, WildFly, Tomcat, Jboss, WebLogic, etc)
+y la contraseña debe acceso debe estar cifrada.
+
+-- Siempre se debe realizar pruebas de seguridad con la herramienta AppScan.
+
+
+
+
+
+
+---------------------- Mas Informacion (Estudiar) ----------------------
+
+(OWASP)
+
+Top 10 - Security Flaws
+
+Injection
+Broken Authentication and Session Management
+Cross-Site Scripting (XSS)
+Insecure Direct Object References
+Security Misconfiguration
+Sensitive Data Exposure
+Missin Function Level Acces Control
+Cross-Site Request Forgery (CSRF)
+Using Components with Known Vulnerabilities
+Unvalidated Redirects and Forwards
+
+
+
+
+--------
+
+Principios
+
+--Least Privileges (Privilegios Minimos)
+
+Cada vez que se empiece un proyecto, estar pensando en la seguridad;
+controlando desde el comienzo, los accesos y a variables, metodos etc.
+
+Pensar en roles para los usuarios, con determinados permisos. para que algunos
+tengan o no acceso a una determinadad informacion dentro de la aplicacion.
+
+
+--Complete Mediation
+
+Esto principio significa, que todo debe pasar a traves del componente de
+seguridad que existe en la aplicacion.
+todas las peticiones deben ser validadas y autorizadas por el componente
+y solo asi podra entrar a la aplicacion
+
+el componente debera verificar la Autenticacion y la Autorizacion antes de
+ejecutar la accion del usuario.
+
+
+--Defense in Depth
+
+Tener multiples niveles de seguridad y asegurarse de tener las siguentes 3 'partes':
+
+- Como prevenir
+- Como detectar
+- Como reaccionar
+
+
+--Trust Nothing
+
+No confiar en nada ni nadie,cualquier informacion que trate de entrar al sistema es
+un problema potencial de seguridad (injections ...)
+se suele tener una 'whitelist' donde se valida/autorizan algunas cosas.
+
+
+--Economy of Mechanism
+
+Mantener un sistema Simple, ya que si el sistema es simple seria mucho mas facil
+protegerlo y crearle la seguridad correctamente.
+
+
+--Openness of Design
+
+Ser abierto de mente, a cerca del diseño de la aplicacion, ya que es un buen camino para
+encontrar fallas de seguridad.

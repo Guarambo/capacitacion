@@ -1,0 +1,584 @@
+---------------------- Informacion general - INICIO ----------------------
+
+por cada controller, se debe de crear un archivo de JUnit test, y por cada metodo dentro de
+dicho controller, se debe de crear un @Test con sus respectivas validaciones...
+Mas informacion de como implementar pruebas unitarias, mockito y jacoco:
+https://www.youtube.com/watch?v=jPuEALkZTBo
+
+
+
+---------------------- Informacion general - FIN ----------------------
+
+
+---------------------- MOCKITO - INICIO ----------------------
+
+creamos un proyecto Maven y agregamos las librerias requeridas;
+
+(19/06/2019)
+JUnit (version Estandar 4.12) // Version base
+JUnitJupiter (version 5) // Si se desea la ultima version
+mockito-core (version Estandar 2.23.0) // Version base
+
+creamos un metodo y le agregamos la etiqueta @Test de JUnit
+despues utilizamos el metodo 'mock' para crear un objeto que
+imitia a la clase que le llevamos como parametro;
+esto ayuda mucho, ya que a veces es imposible o impracticable
+utilizar el objeto real dentro de las pruebas .
+
+los mocks sirven para simular objetos que posiblemente todavia
+no se han creado/instanceado y con esto podemos simular el comportamiento
+de dicho objeto. lo que nos ayuda a hacer pruebas.
+
+la sentencia 'when(condicion...).thenReturn(valorARetornar);
+signifca que cuando alguien haga un llamado a la condicion que esta 
+dentro del when, va a retornar 'valorARetornar' que esta en el bloque
+thenReturn;
+Ej:
+
+when(mockList.size()).thenReturn(2);
+
+//Primer valor es el esperado.
+//Segundo valor es el que enviamos para hacer pruebas.
+assertEquals(3, mockList.size());
+
+cuando la prueba unitaria ejecute la linea anterior(assertEquals),
+hara un llamado a 'mockList.size()' lo que invocara al 'when' anterior,
+y este retornará '2'.
+
+Ejemplo:
+
+------ Ejemplo # 1 ------
+//Usando un 'Mockito'
+	@Test
+	public void testRetrieveToolsRelatedToSpringMock() {
+		
+		//Mockear la clase a utilizar
+		TodoService todoServiceMock = mock(TodoService.class);
+		
+		//Lista con los valores a devolver cuando el metodo retrieveTools del mock
+		//se le envie como parametro 'Dummy'
+		List<String> todos = Arrays.asList("Spring MVC", "Spring", "Dance");
+		
+		//cuando se le envie Dummy va a retornar la lista anterior
+		when(todoServiceMock.retrieveTools("Dummy")).thenReturn(todos);
+		
+		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
+		List<String> filteredTools = todoBusinessImpl.retrieveToolsRelatedToSpring("Dummy");
+		
+		assertEquals(2, filteredTools.size());
+	}
+
+
+------ Ejemplo # 2 ------
+
+    @Test
+	public void mockListSizeTest() {
+		List<?> mockList = mock(List.class);
+		
+		when(mockList.size()).thenReturn(2);
+		when(mockList.isEmpty()).thenReturn(true);
+		
+		//Primer valor es el ESPERADO
+		//Segundo valor es el metodo a evaluar.
+		assertEquals(2, mockList.size());
+		assertEquals(true, mockList.isEmpty());
+	}
+
+
+------ Ejemplo # 2 ------
+
+este ejemplo es para retornar multiples valores cuando se hace
+llamado al mismo metodo (en este caso .size), lo que nos retornaria
+dos o mas valores (los que se deseen especificar).
+Hay que tener en cuenta que el orden puede afectar; esto que significa,
+que los assertEquals o asserts que planeen hacer un llamado al metodo '.size'
+deben estar en el orden correcto, para lograr que funcionen las pruebas, si no
+saldran fallidas.
+
+    @Test
+	public void mockListSizeMultiplesTest() {
+		List<?> mockList = mock(List.class);
+		
+		/*cuando utilizamos la sentencia thenReturn multiples veces
+		 * tiene un orden en especifico, (el que nosotros le demos)
+		 * si en las pruebas unitarias se llama en un diferente orden,
+		 * probablemente siempre marque error/fallida la prueba.
+		 */
+		
+		when(mockList.size()).thenReturn(2).thenReturn(3);
+		
+		assertEquals(3, mockList.size());
+		assertEquals(2, mockList.size());
+	}
+
+------ Ejemplo # 3 ------
+
+aqui al tipo de variable de mockList 'List' se le elimino los diamantes
+que en los ejemplos anteriores estaban ('<?>'); ya que daba problemas al tratar
+de retornar un valor de tipo String.
+
+    @Test
+	public void mockListGetTest() {
+		List mockList = mock(List.class);
+		
+		when(mockList.get(0)).thenReturn("Posicion 1");
+		
+		/*
+		 * como en la variable mockList solo hay una posicion
+		 * al hacer el llamado a la posicion numero 2 (.get(1)) va retornar null
+		 * por eso se esta colocando en lo esperado 'null'
+		 */
+		assertEquals("Posicion 1", mockList.get(0));
+		assertEquals(null, mockList.get(1));
+	}
+
+------ Ejemplo # 4 ------
+
+    @Test
+	public void mockListEasyMockTest() {
+		List mockList = mock(List.class);
+		
+		/*
+		 * utilizando un ArgumentMatchers (anyInt()) indicamos que
+		 * cualquier posicion que reciba, va ser soportada y va retornar siempre
+		 * el valor que esta dentro de thenReturn('');
+		 */
+		when(mockList.get(anyInt())).thenReturn("Posicion mil");
+		
+		assertEquals("Posicion mil", mockList.get(0));
+		assertEquals("Posicion mil", mockList.get(2));
+		assertEquals("Posicion mil", mockList.get(46));
+		assertEquals("Posicion mil", mockList.get(677));
+		assertEquals("Posicion mil", mockList.get(14));
+	}
+
+------ Ejemplo # 5 ------
+
+En este ejemplo, estamos haciendo retornando un error como prueba.
+a la etiqueta @Test se le agrega 'expected' para indicar que clase debe retornar
+la prueba unitaria; que en este ejemplo retorna de tipo RuntimeException.
+
+    @Test(expected = RuntimeException.class)
+	public void mockListThrowExceptionTest() {
+		List mockList = mock(List.class);
+		
+		when(mockList.get(anyInt())).thenThrow(new RuntimeException("Arrojando un error"));
+		
+		mockList.get(0);
+	}
+
+
+
+----------- ArgumentMatchers - INICIO -----------
+
+--- Lista de tipos de ArgumentMatchers ---
+Lista de 'EasyMock ArgumentMatchers' disponibles para hacer uso de ellas.
+Mas Informacion;
+https://static.javadoc.io/org.mockito/mockito-core/2.7.0/org/mockito/ArgumentMatchers.html
+https://www.baeldung.com/easymock-argument-matchers
+https://www.baeldung.com/mockito-argument-matchers
+
+anyBoolean()
+anyByte()
+anyChar()
+anyInt()
+anyLong()
+anyFloat()
+anyDouble()
+anyShort()
+anyObject()
+anyVararg()
+any(Class<T>)
+any()
+anyString()
+anyList()
+anyListOf(Class<T>)
+anySet()
+anySetOf(Class<T>)
+anyMap()
+anyMapOf(Class<K>, Class<V>) //K = Key, V = Value
+anyCollection()
+anyCollectionOf(Class<T>)
+y muchos mas...
+
+--- Lista de tipos de ArgumentMatchers ---
+
+
+dentro de la libreria de Mockito existen varios metodos llamados
+'ArgumentMatchers' que nos simplican cualquier tipo de valor que se requiera;
+
+when(flowerService.analyze(anyString())).thenReturn("Flower");
+
+en el ejemplo anterior, cualquier String que le enviemos va retornar 'Flower'.
+
+cuando en la condicion se requieren utilizar multiples valores y se planea utilizar
+los 'ArgumentMatchers', no se puede utilizar solo uno, si no que cada valor tiene que ser
+de ArgumentMatchers;
+
+Ejemplo:
+
+    when(mock.isABigFlower("poppy", anyInt())).thenReturn(true);
+
+Estamos enviando 'poppy' y 'anyInt()', esto es incorrecto ya que "poppy" no es de algun
+tipo de ArgumentMatchers, para solucionar esto debe ser de la siguiente manera;
+
+    when(mock.isABigFlower(eq("poppy"), anyInt())).thenReturn(true);
+
+donde 'eq()' es la forma correcto de enviar un String utilizando ArgumentMatchers.
+
+----------- ArgumentMatchers - FIN -----------
+
+
+----------- Como escribir codigo Testeable - INICIO -----------
+
+EJEMPLO:
+
+public class PayrollServiceImpl {
+ 
+    private EmployeeRepository employeeRepository;
+    private NotificationService notificationService;
+ 
+    private static final int NOT_ENOUGH_EXPERIENCE = 405;
+    private static final int SALARY_INCREASED = 123;
+ 
+    public PayrollServiceImpl(EmployeeRepository employeeRepository, NotificationService notificationService) {
+        this.employeeRepository = employeeRepository;
+        this.notificationService = notificationService;
+    }
+ 
+    public int increaseSalary(int employeeId, BigDecimal amount) {
+        Employee employee = this.employeeRepository.findEmployee(employeeId);
+        // only employees with more than 5 years of experience can get a raise
+        if (employee.getYearsOfExperience() > 5) {
+            employee.setSalary(employee.getSalary() + amount);
+            this.employeeRepository.save(employee);
+ 
+            // notify employee about the raise
+            this.notificationService.notifySalaryIncreased(employee);
+ 
+            return SALARY_INCREASED;
+        } else {
+            return NOT_ENOUGH_EXPERIENCE;
+        }
+    }
+ 
+}
+
+En este ejemplo, se creo un constructor que recibe los parametros para instanciar los objetos
+que se utilizan dentro de la clase.
+y dentro del metodo 'increaseSalary' que retorna un valor int; se le implemento
+el return, para controlar los estados en los cuales esta la peticion;
+(antes era de tipo void, lo que dificultaba hacer una prueba unitaria.)
+
+por medio de esta correccion;
+- ya podemos controlar cuales son las dependencias de esta clase en las pruebas unitarias;
+(el constructor recibe parametros para instanciar) lo que nos facilitaria el uso de mocks.
+
+Ej: pasar un mock de la interfaz 'NotificationService' al constructor de clase de PayrollServiceImpl
+al inicializar la prueba unitaria para validar si el metodo notifySalaryIncreased fue llamado o no.
+
+Tambien se puede hacer lo mismo con el mock de tipo 'EmployeeRepository' para que arroje una
+excepcion al ser llamado, para simular el caso donde se envie un employeeId que no existe.
+
+----------- Como escribir codigo Testeable - FIN -----------
+
+
+----------- tests doubles - INICIO -----------
+
+IMPORTANTE ***********
+
+Dummy objects :
+Este tipo de objetos son asignados al componente pero nunca se llaman y por lo general están vacíos.
+
+Fake objects:
+Este tipo de objetos tienen implementaciones funcionales pero simplificadas,
+normalmente utilizan datos que no vienen de la base de datos principal,
+sino que se tienen en cache u otra fuente más simple.
+
+Stub classes:
+Es una implementación parcial de una interfaz o clase con el propósito
+de utilizarla durante el test, normalmente solo cuentan con los métodos
+implementados que serán utilizados durante el test.
+
+Mock objects:
+Es una implementación Dummy de una interfaz o clase en la cual se define la salida
+que tendrá la llamada de un método.
+
+
+Estos “test doubles” aseguran que las pruebas se ejecuten solo sobre el componente que deseamos
+probar asegurando que no se tendrá ningún efecto secundario de ninguna otra clase.
+
+
+----------- tests doubles - FIN -----------
+
+----------- Spying con Mockito - INICIO -----------
+
+Segun la informacion de la capacitacion
+(https://devs4j.com/2018/04/27/pruebas-unitarias-parte-3-introduccion-a-spying/)
+
+"Un Mock reemplaza por completo la clase base y solo devuelve valores por defecto o valores
+definidos por uno mismo, mientras que un Spy mantendra los objetos originales y solo 
+reemplazara algunos metodos, a esto se le conoce como 'partia mocking'".
+
+EJ:
+
+//El RunWith es necesario para utilizar la etiqueta @Mock y probablemente @Spy
+@RunWith(MockitoJUnitRunner.class)
+public class MockAndSpyTest {
+
+	@Mock
+	private ArrayList mockArrayList;
+	
+	@Test
+	public void mockTest() {
+		mockArrayList.add("Objeto 1");
+		mockArrayList.add("Objeto 2");
+		mockArrayList.add("Objeto 3");
+		
+		//segun el tutorial, el tamaño debia ser 0, por que co
+		assertEquals(0, mockArrayList.size());
+	}
+	
+	
+	@Spy
+	private ArrayList spyArrayList;
+	
+	@Test
+	public void spyTest() {
+		spyArrayList.add("Objeto 1");
+		spyArrayList.add("Objeto 2");
+		spyArrayList.add("Objeto 3");
+		
+		assertEquals(3, spyArrayList.size());
+		
+		when(spyArrayList.size()).thenReturn(20);
+		assertEquals(20, spyArrayList.size());
+	}
+}
+
+Diferencias, es que el mock en el metodo 'mockTest' no guarda la informacion que se le añade, por
+ende al llamar .size retorna 0.
+mientras que si hacemos lo mismo pero con la etiqueta @Spy la ArrayList va a guardar lo que se le
+agrego y lo va tener en memoria por si el usuario desea seguir usandolo; por eso al utilizar el
+metodo .size; retorna el tamaño correspondiente a lo que se le agrego.
+(se denomina partial mock)
+
+
+----------- Spying con Mockito - FIN -----------
+
+
+----------- Code coverage con JaCoCo - INICIO -----------
+
+jacoco nos ayuda a validar si todas las lines de codigo, que tenemos en nuestras clases,
+estan siendo usadas o no.
+
+/**
+ * @author raidentrance
+ *
+ */
+public class Calculator {
+    public int sumPositiveValues(int... numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            if(number>0){
+                sum += number;
+            }
+        }
+        return sum;
+    }
+}
+
+'int...' es un 'vararg' lo que significa que aceptara multiples elementos de tipo int.
+ver mas informacion;
+https://stackoverflow.com/questions/2367398/what-is-the-ellipsis-for-in-this-method-signature
+https://stackoverflow.com/questions/34978244/what-is-int-in-java-methods-parameter
+
+Se agrega el plugin de JaCoCo:
+
+    <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.2</version>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>prepare-agent</goal>
+                </goals>
+            </execution>
+            <execution>
+                <id>report</id>
+                <phase>prepare-package</phase>
+                <goals>
+                    <goal>report</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+
+con la dependencia de JUnit.
+Luego, se hace un maven install y un jacoco:report
+Comandos:
+
+    mvn install
+    mvn jacoco:report
+
+esto creara un directorio dentro de 'target' llamado site, y dentro de este veremos otra carpeta
+llamada jacoco y dentro de este, un archivo llamado index.html
+
+cuando abrimos el index.html nos mostrara una pagina donde aparece varios valores de cada archivo
+la mas importante es 'Missed Instructions' con lo que muestra el porcentaje de uso del codigo
+de las clases/metodos.
+
+file:///C:/Users/santiago.montoya/Documents/EclipseProjects/mockito-dev4j/target/site/jacoco/com.capacitacion.mockito.mockito_dev4j/index.source.html
+
+Si ocurre algun error al utilizar ambos comandos 'mvn install & mvn jacoco:report'
+repetir este proceso estando dentro de la carpeta del proyecto por medio de la consola.
+por alguna razon lo hace a veces y a veces no (esta ocurriendo en proyectos maven dentro del pc)
+
+
+----------- Code coverage con JaCoCo - FIN -----------
+
+
+
+----------- Spring Boot Test - INICIO -----------
+https://www.baeldung.com/spring-boot-testing
+
+en este 'tutorial' se agregan las siguientes dependencias
+que pueden ser agregadas por medio de https://start.spring.io/
+
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-test</artifactId>
+		<scope>test</scope>
+		<version>2.0.4.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>com.h2database</groupId>
+		<artifactId>h2</artifactId>
+		<scope>test</scope>
+		<version>1.4.194</version>
+	</dependency>
+
+H2 es una base de datos 'en memoria'. con el bloque '<scope/>' y la palabra 'test'
+Elimina la necesidad de configurar una base de datos real para fines de prueba.
+
+
+Despues se hace una integracion de prueba (Integration Testing) con '@DataJpaTest'
+se crea una clase llamada employee e implementamos JPA (etiqueta @Entity, @Table, etc...)
+
+se crea una clase repositorio usando Spring Data JPA:
+
+	@Repository
+	public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+	
+		public Employee findByName(String name);
+	
+	}
+
+
+Despues se crea la clase test:
+
+	@RunWith(SpringRunner.class)
+	@DataJpaTest
+	public class EmployeeRepositoryIntegrationTest {
+	
+		@Autowired
+		private TestEntityManager entityManager;
+	
+		@Autowired
+		private EmployeeRepository employeeRepository;
+	
+		// write test cases here
+	
+	}
+
+@RunWith(SpringRunner.class) = se utiliza para crear un puente entre Spring Boot Test y JUnit.
+@DataJpaTest = provee algunas configuraciones iniciales para las pruebas de la capa de persistencia;
+- configuracion de H2, una base de datos en memoria.
+- configuracion de Hibernate, Spring Data y el DataSource
+- mejorando el '@EntityScan'
+
+como se requiere de alguna informacion para hacer las pruebas, podemos utilizar 'TestEntityManager'
+este nos lo provee Spring Boot y es una alternativa al estandar EntityManager de JPA que provee
+metodos comunmente usados cuando se escriben pruebas.
+
+	@Test
+	public void whenFindByName_thenReturnEmployee() {
+		// given
+		Employee alex = new Employee("alex");
+		entityManager.persist(alex);
+		entityManager.flush();
+	
+		// when
+		Employee found = employeeRepository.findByName(alex.getName());
+	
+		// then
+		assertThat(found.getName())
+		.isEqualTo(alex.getName());
+	}
+
+
+como se puede ver en el codigo anterior, se esta utilizando TestEntityManager para insertar un empleado
+en la base de datos y leyendolo por medio de 'find by name' API.
+
+
+--- Mocking with @MockBean
+
+la capa de servicio es dependiente de Repository, pero para la prueba de la capa de servicio, no
+se necesita conocer, o no importa como la capa de persistencia es implementada;
+
+	@Service
+	public class EmployeeServiceImpl implements EmployeeService {
+	
+		@Autowired
+		private EmployeeRepository employeeRepository;
+	
+		@Override
+		public Employee getEmployeeByName(String name) {
+			return employeeRepository.findByName(name);
+		}
+	}
+
+idealmente, se debe poder escribir y probar la capa de servicio sin conectarse 
+completamente a la capa de persistencia.
+para lograr eso, se usa 'mocking support' que lo provee Spring Boot Test.
+
+	@RunWith(SpringRunner.class)
+	public class EmployeeServiceImplIntegrationTest {
+	
+		@TestConfiguration
+		static class EmployeeServiceImplTestContextConfiguration {
+	
+			@Bean
+			public EmployeeService employeeService() {
+				return new EmployeeServiceImpl();
+			}
+		}
+	
+		@Autowired
+		private EmployeeService employeeService;
+	
+		@MockBean
+		private EmployeeRepository employeeRepository;
+	
+		// write test cases here
+	}
+
+
+
+
+
+
+MIRAR PROYECTO EN STS LLAMADO 'springboosttest'
+para ver varias etiquetas y mas informacion de este Test.
+
+
+
+
+----------- Spring Boot Test - FIN -----------
+
+
+
+
+
+---------------------- MOCKITO - FIN ----------------------
