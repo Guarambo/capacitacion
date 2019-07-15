@@ -26,3 +26,41 @@ Los cambios se ven en minutos y recibes feedback de los clientes para iterar rap
 
 
 "La clave esta en la Automatizacion"
+
+
+
+Continuous Delivery y Continuous Deployment
+
+son muy parecidos, y tecnicamente hace casi lo mismo solo con un punto pequeño pero importante;
+
+Dependiendo del proyecto, y de la complejidad que conlleva ejecutarlo/desarrollarlo se utiliza
+bien sea Delivery o Deployment.
+Evaluando bien el proyecto y su desarrollo se puede determinar si es necesario hacer un deploy
+a produccion de manera manual o automatica, obviamente despues de que las pruebas de aceptacion
+pasaran.
+
+Continuous Delivery es de manera manual, por lo que le tenemos que decir al sistema que debe de
+hacer un push o un deploy a produccion, (de esta manera nos aseguramos de que no suba ningun error, 
+o problema que pueda ser critica a produccion).
+Mientras que Continuous Deployment hace de una manera automatica este paso. por lo que hay que estar
+100% seguro de que cuando pasen las pruebas no afecte en nada a produccion.
+
+
+
+SLO/SLI
+Server Level Objetives
+Server Level Indicators
+
+buena practica para los logs y exceptions trackers:
+
+Tener por separado los Logs dependiendo de que tipo de informacion se este devolviendo, si es un error
+interno crear un log para los fatal error, si es un error de una aplicacion externa que nuestra aplicacion
+hace uso de ella, se puede considerar enviarse al log info, ya que es un error que puede estar fuera
+de nuestro alcance.
+
+los exceptions trackers deberian de estar por fuera de la infraestructura donde este alojada la aplicacion
+ya que si por alguna razon se caen nuestros servidores, tampoco hay forma de visualizar las excepciones
+ya que tambien se cayo. por ende se recomienda que sea de forma externa, una empresa que se dedique
+a eso tal vez.
+Siempre y cuando dentro de esos logs de excepciones no haya informacion confidencial o valiosa de la empresa
+y el cliente.
