@@ -1,0 +1,359 @@
+Devops es una serie de practicas culturales y herramientas que permiten a las organizaciones
+poder llevar software de manera muy agil a los usuarios que lo requieren.
+
+SSH pasw kappa123
+
+----- Que es DevOps
+
+Se encarga desde el momento que se escribe el codigo, hasta el momento donde el mismo codigo
+corre en los diferentes dispositivos de los clientes de que los procesos sean seguros, automatizados, 
+con practicas de calidad.
+
+    -   Pruebas Automatizadas   -
+    Asegura la calidad del codigo.
+
+    -   Continuous Integration (CI)   -
+    Automatiza los procesos de calidad.
+
+    -   Continuous Delivery (CD)   -
+    Automatiza la distribucion de aplicaciones.
+
+    -   Monitoreo y logging   -
+    Detecta problemas oportunamente.
+
+    -   Microservicios   -
+    Separa las funcionalidades de la aplicacion en servicios independientes.
+
+    -   Comunicacion y colaboracion   -
+    Une diversos equipos y flujos de trabajo.
+
+
+
+----- Ciclo de vida del DevOps
+
+La representacion grafica de DevOps casi siempre es un loop infinito con unos pasos a seguir
+para el correcto desarrollo de un proyecto
+Este loop tiene unos pasos o estados;
+
+    --------------- Desarrollo
+
+    - Plan:
+    O tambien Planificacion, En este paso estamos en desarrollo, se organizan cuales son los
+    labores, requerimientos que se necesitan implementar. para esto se utilizan herramientas de
+    planificacion como issues o boards.
+
+    - Creacion:
+    Escribir codigo para resolver el problema del negocio, donde implementamos git para el versionamiento
+    para que el equipo de trabajo funcione de una manera agrupada.
+
+    - Verificacion:
+    En este paso se corren las pruebas automatizadas, donde se definen las reglas que tienen que probarse.
+    Tambien se puede correr pruebas de seguridad, construccion del proyecto para determinar si las 
+    dependencias son correctas.
+
+    - Empaquetar:
+    Aqui es donde se debe de organizar como debemos empaquetar toda la aplicacion, microservicios 
+    o funciones.
+
+    --------------- Operaciones
+
+    - Version nueva:
+    Nueva version que llega a produccion, esto se puede automatizar por medio de Continuous Delivery
+    pero este tambien podria traer problemas, se envia una nueva version que contenga bugs, este lo
+    enviaria a produccion, por lo que se recomienda desplegar una version que se este 100% seguro
+    de que no haya bugs.
+
+    - Configuracion:
+    Modificar posiblemente la configuracion base, ya que hay un nuevo estado en la aplicacion.
+
+    - Monitorear:
+    Verificar como esta funcionando el codigo, en cada dispositivo.
+
+
+Los beneficios de este ciclo de vida son:
+
+- Velocidad
+- Rapida distribucion
+- Confiabilidad
+- Escala
+- Colaboracion
+- Seguridad
+
+
+
+----- Que es GitLab
+
+Es una compañía que realiza un proyecto open source, un producto especializado en el ciclo de vidas del DevOps.
+
+GitLab CI es el corazon de GitLab permite unir todos los productos de GitLab,
+y entregarlos en un paquete que les sirva directamente y rapidamente para los Devops.
+
+permite empaquetar codigo;
+    - Container registry
+    - Paquetes privados (NPM y Maven)
+
+Distribucion;
+    - Deployment strategies
+    - Ambientes
+    - Gitlab pages
+    - Feature flags
+
+Configuracion;
+    - Auto DevOps
+    - Integracion con Kubernetes
+    - Knative serverless
+    - Manejo de secretos
+    - Chatops
+
+Monitoreo;
+    - Prometheus
+    - Jaeger
+    - Sentry
+
+Seguridad;
+    - Container scanning
+    - Dependency scanning
+    - Dynamic security testing (DAST)
+    - Static security testing (SAST)
+    - Manejo de licencias
+    - Security dashboard
+
+Defensa;
+    Firewall, Threat Detection, Data loss reventions y mas, son capacidades de GitLab que posiblemente 
+    esten en desarrollo o ya se desarrollaron (2019)
+
+
+
+Formas de autenticarse en GitLab:
+
+    - Username/Password
+    Login
+
+    - 2FA (Two factor authetication)
+    OTP y FIDO U2F
+
+    - SSH Key
+    Push code
+
+
+
+Los grupos dentro de GitLab sirven para segmentar los equipos de trabajo dentro de un proyecto
+estos grupos se utilizan en GitLab a traves de 'namespaces';
+Ej:
+https://gitlab.com/username
+https://gitlab.com/groupname
+https://gitlab.com/groupname/subgroup
+
+para los nombres existen palabras reservadas;
+
+Commits, Create, Files, New, Wikis, etc.
+
+Mas info:
+https://docs.gitlab.com/ee/user/reserved_names.html
+
+
+Los grupos pueden tener 3 tipos de 'visibilidad';
+
+    - Public
+    cualquier persona puede ver el contenido asi no haya iniciado sesion.
+    - Interna
+    solo los usuarios que iniciaron sesion puede tener acceso al grupo.
+    - Privada
+    permite que los proyectos y grupos sean solo accesibles a traves de los permisos otorgados en los mismos.
+
+
+
+
+----- Autorizacion
+
+    - Guest
+    Tiene solo acceso de lectura, no puede modificar ningun archivo, no puede contribuir al codigo, 
+    no puede abrir issues.
+
+    - Reporter
+    Pueden crear issues, comentarlos, pero no pueden añadir codigo.
+
+    - Developer
+    permite tener acceso de los pipelines de CI, issues, branchs, etc. pero no puedes administrar
+    nuevos miembros, ni tener acceso a las configuraciones secretas del proyecto.
+
+    - Owner / Maintainer
+    Eres el creador o administrador del proyecto. tiene acceso a todo el proyecto.
+
+
+
+----- proyectos
+
+    - Issue tracker
+    Es especifico para equipos de desarrollo de software que trabajan de manera agil,
+    adentro hay conceptos como milestones, estimados de tiempo, etc.
+
+    - Code repository
+    Lugar central que permite compartir, colaborar alrededor del codigo.
+
+    - Gitlab CI
+    Automatizacion del flujo de trabajo del proyecto.
+
+
+
+Las funcionalidades que tiene GitLab estan disponible siempre para los proyecto que son publicos, 
+si se crea un proyecto privado, este tendra acceso a unas cuantas funcionalidades, pero no a la 
+totalidad existentes dentro de GitLab. (Si se desea tiene acceso a estas funcionalidades en un 
+grupo privado, GitLab tiene unas opciones de pago disponibles para esto.)
+
+
+---- Etiquetas dentro de un issue
+
+Permiten categorizar los issues o merge requests con titulos descriptivos;
+Ej.
+Si un issue se relaciona con la seguridad debera tener una etiqueta 'Security' para indicar
+de que tipo es el issue.
+
+Permiten filtrar y buscar en GitLab.
+Permite seguir temas a traves de las notificaciones.
+
+
+uno puede 'suscribirse' a una o varias etiquetas, para que cuando alguien haga uso de ella
+nos envie una notificacion indicando donde se utilizo para estar pendiente del tema.
+
+
+----- Pesos de un issue
+
+Permite asignar un valor numerico (el numero debe de poder representarse en 4-bytes) que seria 
+una estimacion del peso de dicho issue.
+Esto representa el nivel de importancia de los issues, mas no indica que si es de un alto numero
+quiere decir que se esta en la obligacion de solucionarlo ocupando 100% tu tiempo.
+
+Dentro de los pesos hay varias formas de asignarlo;
+Utilizan los 'puntos Fibonacci' (1, 2, 3, 5, 8, 13, etc.)
+o tambien utilizan las tallas de camisas (S, M, L, XL, XXL, etc.)
+
+con el fin de entender el nivel de importancia del issue, obviamente la decision recae en todo el 
+equipo, ya que el objetivo es que todos entiendan la forma en que se planea utilizar el peso.
+
+
+
+----- Milestones
+
+Son una forma de agrupar varios Issues, estableciendo un tiempo determinado en el cual se planean 
+completarlos.
+
+hay varias formas de agruparlos y asignarles el tiempo;
+normalmente cuando manejan agile se pueden vovler del mismo tamaño de un Sprint.
+tambien puede ser del tamaño de una version, que se planee sacar (Release).
+
+Ejemplo de Release;
+V1.1.2 (donde .2 podria ser ese milestones procesado y entregado.)
+
+
+
+----- Burndown chart
+
+Es un concepto de agile, en el cual podemos evaluar en que punto o cuanto progreso llevamos dentro 
+de un sprint y permite tomar acciones cuando se evolue si es relevante tomar dichas decisiones.
+
+Es una especie de alarma en la cual nos muestra si vamos adelantados o atrasados con respecto al 
+tiempo y desarrollo de dicho sprint.
+
+
+
+----- Service desk
+
+- Permite dar soporte a traves de email a tus clientes directamente desde Gitlab.
+- Permite que el equipo no tecnico interno de la empresa reporte bugs, abra issues sin necesidad 
+de que tengan una cuenta en Gitlab.
+
+
+Correo generado por Gitlab del proyecto para que las personas externas reporten bugs, etc;
+incoming+platzi-curso-gitlab-cursoplatzi-gitlab-13360550-issue-@incoming.gitlab.com
+
+
+estos issues son de tipo Confidencial.
+
+
+
+
+----- Lista de Quick Actions dentro de Gitlab
+https://docs.gitlab.com/ee/user/project/quick_actions.html
+
+
+
+
+
+------------------
+A continuacion del curso, se hace un proyecto de angular, para esto
+hay que tener instalado Node JS y NPM.
+
+https://www.ecodeup.com/como-instalar-node-js-y-su-gestor-de-paquetes-npm-en-windows/
+https://nodejs.org/es/
+
+luego instalamos el cli de angular con el siguiente comando
+npm install -g @angular/cli
+
+------------------
+
+
+
+
+Merge Requests
+
+- Es la base de la colaboracion alrededor del codigo de Gitlab.
+- Es tan solo unir los cambios de una rama con otra.
+- Permite tener visibilidad sobre los datos importantes, antes de hacer merge.
+
+cuando se tiene un merge request, este tiene en el titulo un 'prefijo' que es 'WIP:'
+y por ende no nos dejara hacer el merge, ya que esto significa 'Work In Progress'
+por ende el sistema considera que todavia no se ha terminado.
+
+al terminar la activdad de ese merge, y verficcar que es lo esperado en dicho merge;
+se entra al merge dentro de GitLab y en la seccion Merge Requests seleccionamos
+el que completamos, luego hay un widget llamado 'Resolve WIP status' que le tendremos que dar
+para que el titulo del merge cambie y se permita hacer dicha accion.
+
+luego de esto, si el merge no tiene a nadie asignado, se le asigna a alguien para que esa persona
+sea la que haga el merge. (Casi siempre se selecciona al encargado del repo ó lider del equipo).
+
+
+El archivo Bug.md que esta dentro de la carpeta .gitlab/issue_templates del proyecto
+es un archivo guia de Issue que detecta gitlab y lo coloca como opcion para que cuando alguien
+trate de hacer un issue tenga esa opcion disponible y asi organizar y simplificar el issue.
+
+
+
+-----GitLab CI
+
+---------
+
+Documentacion para ver como implementar Gitlab CI de acuerdo a algun lenguaje de programacion
+https://docs.gitlab.com/ee/ci/examples/
+
+---------
+
+Para activar la integracion continua debemos de tener un archivo llamado '.gitlab-ci.yml'
+que en este es donde va estar la configuracion de lo que se desea hacer automaticamente.
+
+Para comprobar que el archivo '.gitlab-ci.yml' funcione y este escrito correctamente
+escribimos lo siguiente al final de la URL del proyecto;
+
+'/-/ci/lint'
+
+Ej:
+
+https://gitlab.com/platzi-curso-gitlab/cursoplatzi-gitlab/-/ci/lint
+
+Nos mostrara un textbox en el cual podremos pegar nuestro codigo del .gitlab-ci.yml y lo podremos
+validar, para comprobar si no hay ningun error de sintaxtis.
+
+
+
+----- Gitlab Pages
+
+Es un hosting estatico para colocar un website.
+
+para configurar gitlab pages se tiene que hacer por medio de gitlab CI.
+hay que colcoar un Job especifico que va ser el encargado de hacer el deployment de la aplicacion 
+estatica. (El job se llama Pages).
+
+Este tambien permite tener dominios personalizados.
+
+Todo lo que se planee hacer deploy debe ir a un directorio llamado public (ej: './public')
