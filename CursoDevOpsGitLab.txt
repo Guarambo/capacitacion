@@ -357,3 +357,175 @@ estatica. (El job se llama Pages).
 Este tambien permite tener dominios personalizados.
 
 Todo lo que se planee hacer deploy debe ir a un directorio llamado public (ej: './public')
+
+
+
+----- Gitlab AutoDevOps
+
+Es una solucion que permite generar un flujo de DevOps inmediato con la creacion del proyecto 
+que incluye todas las mejores practicas.
+
+    Features:
+    - Auto Build
+    - Auto Test
+    - Auto Code Quality
+    - Auto SAST
+    - Auto dependency scanning
+    - Auto container scanning
+    - Auto review apps
+    - Auto Dast
+    - Auto Deploy
+    - Auto performance
+    - Auto testing
+
+    Prerequisitos:
+    - Gitlab runner
+    - Kubernetes
+    - Base domain
+    - Prometheus
+
+
+Para incluir AutoDevOps cuando ya se tiene el archivo .gitlab-ci.yml 
+solo hay que añadir el siguiente bloque de codigo;
+
+    include:
+        template: Auto-Devops.gitlab-ci.yml
+
+
+
+---------------------------------------
+Implementando Gitlab AutoDevOps
+
+
+Creacion de Kubernetes - Cluster con Google cloud (Dentro de la opcion de Kubernetes de Gitlab)
+
+Aplicaciones necesarias dentro de Kubernetes cluster.
+
+Instalar Helm Tiller es el manejador de paquetes dentro de Kubernetes.
+Es necesario si deseamos instalar el resto de aplicaciones.
+
+-- Ingress
+Es un load balancer que va generar una IP conectar todo lo de Gitlab con el Kubernete cluster.
+
+
+-- Cert-Manager
+Es un controlador de certificados de Kubernetes nativo.
+Esto permite generar y renovar de manera automatica los certificados de seguridad.
+(Son certificados libres)
+
+-- Prometheus
+Sirve para monitorear la salud del cluster, metricas del performance del cluster.
+
+
+luego de esto nos vamos para Google Cloud y nos vamos a la seccion 'Red de VPC'
+aqui, vamos a Direcciones IP externas y dentro buscamos la IP que se genero cuando
+se termino de instalar Ingress.
+
+a esta IP la modificamos y le decimos que no va ser efimera si no estatica, 
+le asignamos un nombre y una descricion.
+
+
+
+
+---------------------------------------
+Gitlab container registry
+
+no so nun concepto de GitLab si no de Docker.
+Pero GitLab es uno de los proveedores que permiten tener registros privados
+de los contenedores.
+
+
+
+---------------------------------------
+Termino: DevSecOps
+
+---------------------------------------
+Firmas de Seguridad (GPG) (Pretty Good Privacy) (realmente es PGP pero lo llamaron GPG)
+
+- Permite identificar, sin lugar a dudas, de quien proviene el commit.
+- Añade una capa adicional de seguridad de Git, para prevenir "Caballos de Troya"
+- GitLab despliega un banner junto a los commits, para mostrar que dichos commits estan verificados
+
+el comando para esto es 'gpg'
+
+- Para generar una llave;
+    gpg --full-gen-key
+
+Despues elegimos el tipo de llave que vamos a crear;
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+
+La opcion 1 es para firmar y encriptar.
+
+Despues decidimos el tamaño de la llave en Bits; mientras mas grande sea, mas dificil es 
+de corromper
+Ya de ahi, le damos el tiempo de expiracion de la llave;
+         0 = key does not expire
+      <n>  = key expires in n days
+      <n>w = key expires in n weeks
+      <n>m = key expires in n months
+      <n>y = key expires in n years
+
+donde 0 quiere decir que no expira.
+
+
+(Elegi un mes;
+Key expires at Sun Aug 18 15:13:00 2019 HPS)
+
+Para que gitlab confirme la autenticacion de los commits debemos registrar en el GPG
+el mismo correo con el que estamos registrados dentro de gitlab.
+
+
+pinentry se abrira para pedir una contraseña para proteger la llave GPG
+digitamos una contraseña que sea muy fuerte y repetimos y listo se genera.
+psw ImaPragmatic?12
+
+- Comando para listar las llaves que tenemos.
+    gpg --list-secret-key --keyid-format LONG 'email'
+    
+    email = correo con el que registramos la/s llave/s.
+    (Posibles opciones de formato {none|short|0xshort|long|0xlong})
+
+
+Para ver el bloque de llave publica realizamos lo siguiente.
+
+del resultado del comando de consulta, verificamos que llave deseamos utilizar,
+a esta llave tomamos la parte 'sec' y copiamos lo que esta despues del 'rsa.../'
+
+con ese codigo ejecutamos el siguiente comando;
+
+    gpg --armor --export 'codigo'
+
+estoy generara un bloque grande encriptado, que es el que vamos a copiar y pegar
+en gitlab para agregar la llave de seguridad.
+
+
+Para agregarla a git utilizamos el siguiente comando
+git config --global user.signingkey 'codigo'
+git config --global gpg.program gpg
+
+
+
+---------------------------------------
+SAST (Static Application Security Testing)
+
+- Corre analisis estatico en el codigo
+- Verifica que no existan problemas potenciales de seguridad en el codigo de la aplicacion
+- Verifica que no existen secretos "hardcodeados"
+- Crea un reporte que es añadido como widget al merge request
+- Utiliza la imagen de Docker SAST de Gitlab
+
+
+Tipos de vulnerabilidades dentro de Git
+
+- Critical
+- High
+- Medium
+- Low
+- Unknown
+
+
+Dependiendo del lenguaje existe una herramienta especifica para correr estas pruebas.
+En JAVA se utiliza 'find-sec-bugs'.
