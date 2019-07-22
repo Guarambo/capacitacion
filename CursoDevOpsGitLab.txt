@@ -529,3 +529,107 @@ Tipos de vulnerabilidades dentro de Git
 
 Dependiendo del lenguaje existe una herramienta especifica para correr estas pruebas.
 En JAVA se utiliza 'find-sec-bugs'.
+
+
+---------------------------------------
+DAST (Dynamic Application Security Testing)
+
+- Corre escaneos de seguridad en una aplicacion que ya esta en modo 'runtime' o corriendo
+- Utiliza OWASP ZAP proxy y ZAP baseline
+- Corre analisis pasivo
+- Genera un reporte que puede ser verificado en el merge request
+
+
+---------------------------------------
+Continuous Delivery (CD)
+
+Esta opcion dentro de gitlab esta disponible, si configuramos 'AutoDevOps' en el menu de configuracion;
+Dentro de la seccion CI/CD, habilitamos la opcion de Auto DevOps y seleccionamos la opcion;
+"Despliegue automatico a 'staging', despliegue manual a produccion.
+
+luego de esto creamos una pipeline de la rama master, y este iniciara el proceso, lo unico distinto
+sera que dentro del proceso de la pipeline hay nuevos estados;
+Despues de 'Test' estara 'Staging' y luego 'Production' que en este estara por partes el proyecto
+para ser desplegado manualmente; (Se debe de elegir que porcion del proyecto se desea desplegar).
+
+asi que por medio de esto, podremos controlar que deseamos enviar a produccion y que no. para asi
+evitar posibles bugs, que puedan generar perdidas monetarias del proyecto y evitar posibles 
+quejas de los clientes.
+
+Esta opcion debe estar pensada de acuerdo a las politicas de la empresa, debe estar acordado con 
+las personsas encargadas del proyecto, que consideran como una forma viable de desplegar 
+la aplicacion.
+
+
+
+--------
+Ambientes
+
+normalmente dentro de un proyecto se tiene 3 diferentes ambientes de desarrollo que son;
+Staging, Production, Develop.
+(sin contar el ambiente local).
+
+Dentro de gitlab hay varios tipos:
+
+    - Estaticos
+    Son aquellos que no cambian, levantamos el ambiente y por ejemplo queda en una URL, que no
+    va cambiar.
+    - Dinamicos
+    En los ambientes dinamicos, Gitlab permite crear un ambiente para cada rama, por lo que
+    se puede verificar la funcionalidad de cada rama, al momento de hacer un merge request
+    o al momento de mostrarlo al cliente, sin tener que bajar el codigo al pc si no que 
+    gitlab tiene una opcion llamada Review apps, donde se puede tener un ambiente completo 
+    con la funcionalidad de dicho cambio.
+
+    - Protegidos
+    En este tipo de ambiente, se selecciona alguna persona del grupo de trabajo, que va ser 
+    la unica persona que puede hacer despliegue de estos ambientes.
+    Ej:
+    Produccion, ya que es un ambiente muy importante, solo hay unas cuantas personas que 
+    tienen permiso para hacer cambios y desplegar.
+
+Definicion de un ambiente dentro del archivo gitlab-ci.yml;
+
+    deploy_production:
+        stage: deploy
+        environment:
+            name: production
+            url: 'opcional'
+        when: manual
+
+
+
+---------------------------------------
+Feature Flags
+Esto es una tecnica que permite que los equipos de trabajo puedan modificar el comportamiento 
+del sistema sin la necesidad de modificar el codigo o realizar un nuevo despliegue.
+
+Esto tiene una gran desventaja y es que si no sabemos como controlar las Feature flags, podemos 
+construir un sistema en el cual no sea posible escribir pruebas unitarias.
+Por ende, se recomienda que hayan pocas Feature flags.
+
+
+Tipos de Feature flags
+
+- Release Flags
+Este tipo de bandera permite implementar Continuous Delivery, donde los diferentes features se 
+activan de manera manual e independiente. Este es importante cuando se requiere lanzar una 
+funcionalidad compleja que tiene estar al 100%, o cuando se necesita coordinar un evento 
+externo junto con el despliegue de funcionalidad.
+Ej: Lanzamiento en conjunto con una campaña de Marketing.
+
+- Experiment Flags
+Exte tipo de bandera se utiliza cuando la aplicacion permite hacer pruebas de una manera 
+segmentada/dividida en dos, para mostrar las diferentes funcionaldades dependiendo del segmento.
+Este tipo de Flag tiene un tiempo de vida muy corto, ya que con los resultados se decide que 
+opcion es mejor, y se estandariza el uso en el sistema.
+
+- Ops Flags
+Esta permite crear switches con los cuales podemos controlar el comportamiento el sistema cuando 
+esta corriendo.
+Esto suele ser invocado cuando hay cargas inusuales en los cuales es necesario optimizar los 
+recursos que hay disponibles para servir a la aplicacion.
+
+- Permission Flags
+Permite habilitar funcionalidades para usuarios especificos dentro de la aplicacion.
+
