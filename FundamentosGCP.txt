@@ -1,0 +1,33 @@
+Fundamentos de Google Cloud Platform (GCP)
+
+
+App Engine
+
+Permite construir WebApps y Backends, para construir aplicaciones en IOS o Android
+Ventajas que representa esto; es que Google se encarga de abstraer el Sistema Operativo
+para que asi uno como desarrollador, solo este trabajo como si fuera dentro de un servidor 
+en la que se van a ejecutar las aplicaciones que se escriba con alguno de los lenguajes 
+soportados por App Engine, tambien resuelve el Escalamiento, balanceo de cargas, trabajar 
+con multiples versiones, tiene servicios para autenticacion y notificacion por correo electronico.
+
+Tiene dos versiones
+
+    - Estandar
+    En esta version se puede trabajar con los siguientes lenguajes;
+    Python, Java, Php, Go.
+    Tien varias restricciones en cuanto a que no permite algunas versiones mas nuevas de estos 
+    lenguajes de programacion.
+
+    - Flexible
+    En esta version se puede trabajar con, nodeJS, .NETCore, Ruby, Python, Docker, Java, Go, Php.
+    Una de las ventajas que tiene la version Flexible es que permite Docker, por lo que esto 
+    abre puertas a cualquier tipo de lenguaje, ya que solo requieres de crear un contenedor con 
+    la respectiva imagen, para la ejecucion de la aplicacion que estamos desarrollando.
+
+    Guia para ejecutar una aplicacion dentro de AppEngine (Java)
+    https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/helloworld-springboot
+    https://github.com/GoogleCloudPlatform/getting-started-java
+
+    
+
+    
