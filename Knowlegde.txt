@@ -64,7 +64,10 @@ Generar .jar
 desde STS se hace click derecho al proyecto, luego Run As, Maven Build y en goals escribir Package.
 ---------------------------
 
-
+---------------------------
+Limpieza al desinstalar VSCode (Si se requiere)
+https://superuser.com/questions/1380208/how-to-completely-uninstall-visual-studio-code-from-windows-10
+---------------------------
 
 --------------------------- Informacion Capacitacion ---------------------------
 EstadoCapacitacion      -       Nombre                  -       InformacionAdicional
