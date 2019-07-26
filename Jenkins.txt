@@ -1,0 +1,30 @@
+
+(Windows)
+Instalacion de Jenkins localmente;
+
+Por medio del Wizard se instala, al finalizar se inicializa en el puerto 8080
+localhost:8080
+
+y nos pedira una codigo de identificacion que estara en la ruta de la carpeta
+donde se instaló Jenkins.
+
+Ej:
+C:\Program Files (x86)\Jenkins\secrets ' \initialAdminPassword '
+
+Luego de utilizar este codigo, el archivo se eliminara.
+
+Despues continuamos con la Instalacion, Seleccionamos recomendado
+(Si se desea instalar algo especifico, le damos en la otra opcion).
+
+Despues configuramos usuario admin.
+
+
+Para cambiar el puerto en el cual se desea ejecutar localmente Jenkins,
+debemos de modificar el archivo jenkins.xml y buscar la propiedad ' --httpPort= '
+y asignar el puerto en el queremos que se ejecute jenkins.
+
+luego de esto, ejecutamos una terminal como administrador y dentro de la caperta 
+'C:\Program Files (x86)\Jenkins' ejecutamos el siguiente comando:
+'jenkins.exe restart'
+esto va a reiniciar Jenkins y ahora se estaria ejecutando en el nuevo puerto que 
+le asignamos anteriormente.

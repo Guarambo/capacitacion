@@ -28,6 +28,10 @@ Tiene dos versiones
     https://github.com/GoogleCloudPlatform/getting-started-java/tree/master/helloworld-springboot
     https://github.com/GoogleCloudPlatform/getting-started-java
 
+
+
+Para ejecutar el comando de google cloud; 'gcloud app deploy'
+que lo que es crear una appengine con la informacion del proyecto (la aplicacion)
     
 
     
