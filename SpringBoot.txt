@@ -65,7 +65,14 @@ que es donde se colocan las dependencias del proyecto,
 todas las dependencias las guarda en la carpeta .gradle del pc
 
 
+---- Devtools ----
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
 
+Esta dependencia sirve para que cuando se haga un guardado de algun cambio se vuelva a
+ejecutar la aplicacion.
 
 ---- ShortCuts ----
 Ctrl + Shift + O    = Agregar todos los Imports
