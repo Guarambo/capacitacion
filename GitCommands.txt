@@ -1,0 +1,4 @@
+when git returns 'remote: HTTP Basic: Access denied'
+https://gitlab.com/gitlab-com/support-forum/issues/3508
+
+GIT_TRACE=1 git pull origin develop
